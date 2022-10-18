@@ -12,7 +12,7 @@ public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
         logger.debug("Just a simple test about debug log.");
-        logger.info("The studycarbon website alreay running.");
+        logger.info("The studycarbon website already running.");
     }
 
 }
