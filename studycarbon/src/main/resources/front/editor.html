@@ -13,7 +13,7 @@
         $(function() {
             testEditor = editormd("test-editormd", {
                 width: "98%",
-                height: 1000,
+                height: 300,
                 syncScrolling: "single",
                 path: "editor/lib/", //依赖lib文件夹路径    
                 emoji: true,
@@ -32,5 +32,11 @@
         <textarea id="content" name="content" style="display:none;"></textarea>
     </div>
 </body>
+<script>
+    //testEditor.markdownToHTML("content", {
+    //    emoji: true
+    //});
+    console.log($("#content").val());
+</script>
 
 </html>
