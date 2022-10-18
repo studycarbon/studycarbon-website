@@ -14,5 +14,4 @@ public class App {
         logger.debug("Just a simple test about debug log.");
         logger.info("The studycarbon website already running.");
     }
-
 }
