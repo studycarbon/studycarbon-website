@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>发布文章</title>
+    <title>关于本站</title>
     <style>
         * {
             margin: 0;
@@ -122,7 +122,6 @@
         .footer-out {
             background-color: white;
             height: 200px;
-            margin-top: 5px;
         }
         
         .footer1 {
@@ -185,13 +184,6 @@
             color: gray;
         }
     </style>
-
-    <!-- Editor css... -->
-    <link rel="stylesheet" href="../editor/css/style.css" />
-    <link rel="stylesheet" href="../editor/css/editormd.css" />
-    <script src="../editor/js/jquery.min.js"></script>
-    <script src="../editor/js/editormd.min.js"></script>
-
 </head>
 
 <body>
@@ -199,7 +191,7 @@
         <div class="header w">
             <!-- logo位置 -->
             <div class="logoicon">
-                <img src="../images/iconimg.png" alt="">
+                <img src="./images/iconimg.png" alt="">
             </div>
 
             <!--导航栏-->
@@ -239,12 +231,10 @@
 
     </div>
 
-    <div id="test-editormd" style="margin-top: 15px;">
-        <textarea id="content" name="content" style="display:none;"></textarea>
-    </div>
-
-    <div style="width: 60%;margin: 15px auto;height: 40px;">
-        <button style="width: 120px;height: 40px;background-color:rgb(55, 59, 161);border: none;float: right;font-size: 18px;color:white;">发布文章</button>
+    <div style="width: 1200px;height:500px;background-color:white;margin:15px auto;padding:15px;">
+        <p style="height: 50px;font-size:25px;">关于本站</p>
+        <div style="height: 1px;background-color:gray;"></div>
+        <p style="height: 50px;font-size:16px;margin-top: 15px;"> 本站是一个 Carbon 语言交流学习平台，致力于打造 Carbon 语言的中文社区， 讨论 Carbon 语言的发展和相关知识。</p>
     </div>
 
     <div class="outw footer-out">
@@ -283,24 +273,5 @@
         </div>
     </div>
 </body>
-
-<script type="text/javascript">
-    var testEditor;
-    $(function() {
-        testEditor = editormd("test-editormd", {
-            width: "60%",
-            height: 800,
-            syncScrolling: "single",
-            path: "../editor/lib/", //依赖lib文件夹路径    
-            emoji: true,
-            taskList: true,
-            tocm: true,
-            imageUpload: true,
-            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "imageUpload" //上传图片控制器Mapping
-        });
-    });
-</script>
-
 
 </html>
