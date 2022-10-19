@@ -1,0 +1,66 @@
+user:
+	id	
+	rolename
+	userid
+	username
+	email
+	password
+	sex
+	loginstate
+	logintime
+	createtime
+
+
+aritcle:
+	id
+	userid
+	title
+	detail
+	abstract
+	state //文章状态
+	
+	
+praise:	
+	id
+	userid
+	articleid
+	state
+
+follow:	//关注
+	id
+	userid
+	followid
+	state
+
+collection:
+	id
+	userid
+	articleid
+
+comment://评论
+	id	    //id
+	commentid   //评论者id
+	aticleid	    //文章id
+	data             //评论的数据
+	createtime   //创建时间
+	state	   //评论状态 - 该评论是否被删除
+
+specialcolumn
+	id        //专栏id		
+	userid //谁创建的专栏
+	type    //官方类型或者个人类型
+
+article2sc
+	id
+	articleid		//文章id
+	specialcolumnid	//专栏id
+
+contribution
+	id
+	gac	//gitee账号名或者github账号名
+	link	//个人主页
+	desc	//描述 - 贡献简介
+	
+
+	
+	
