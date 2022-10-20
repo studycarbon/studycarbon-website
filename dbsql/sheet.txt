@@ -26,16 +26,16 @@ praise:
 	articleid
 	state
 
-follow:	//关注
-	id
-	userid
+follow:		//关注
+	id	//id
+	userid	//
 	followid
 	state
 
-collection:
-	id
-	userid
-	articleid
+collection:		//收藏
+	id	//id
+	userid 	//用户id
+	articleid	//文章id
 
 comment://评论
 	id	    //id

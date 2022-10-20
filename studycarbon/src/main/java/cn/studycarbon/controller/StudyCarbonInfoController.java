@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/studycarboninfo")
 public class StudyCarbonInfoController {
+
     public static Logger logger = LoggerFactory.getLogger(StudyCarbonInfoController.class);
 
     @Autowired
@@ -25,9 +26,10 @@ public class StudyCarbonInfoController {
 
     @GetMapping
     public StudyCarbonInfo studyCarbonInfo() {
-//        logger.debug("studyCarbonInfo called.");
+        logger.debug("studyCarbonInfo called.");
         StudyCarbonInfo info =  studyCarbonInfoService.getInfo();
         logger.info("studycarbon info:"+info);
         return info;
     }
+
 }

@@ -14,6 +14,6 @@ public class HomePageController {
     @GetMapping
     public ModelAndView homePage() {
         logger.debug("called.");
-        return new ModelAndView("index");
+        return new ModelAndView("front/pages/index");
     }
 }
