@@ -91,7 +91,7 @@
             height: 40px;
             margin-top: 5px;
             border: 0;
-            background: url(./images/btn.png);
+            background: url(/front/images/btn.png);
         }
         
         .user {
@@ -226,7 +226,7 @@
         <div class="header w">
             <!-- logo位置 -->
             <div class="logoicon">
-                <img src="./images/iconimg.png" alt="">
+                <img src="/front/images/iconimg.png" alt="">
             </div>
 
             <!--导航栏-->
@@ -268,9 +268,11 @@
 
     <div class="wrapper">
         <div class="logincontent">
-            <form>
-                <span style="margin-top:50px;">*用户名:</span> <input type="text" value="请输入用户名" class="logininput"><br/>
-                <span>*密码: </span> <input type="text" value="密码" class="logininput"> <br/>
+            <form action="http://localhost/user/login" method="post">
+                <span style="margin-top:50px;">*用户名:</span>
+                <input type="text" value="请输入用户名" class="logininput" name="username"><br/>
+                <span>*密码: </span>
+                <input type="text" value="密码" class="logininput" name="password"> <br/>
                 <input type="submit" class="loginsubmit" value="注册">
             </form>
         </div>
@@ -312,5 +314,9 @@
         </div>
     </div>
 </body>
+
+<script>
+
+</script>
 
 </html>

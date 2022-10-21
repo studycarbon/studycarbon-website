@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class HomePageController {
     public static Logger logger = LoggerFactory.getLogger(HomePageController.class);
+    // 获取网站主页
     @GetMapping
     public ModelAndView homePage() {
         logger.debug("called.");

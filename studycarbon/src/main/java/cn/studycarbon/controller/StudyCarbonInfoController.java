@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @brief: 从数据库中查询studycarbon网站的信息，发送给请求方
  * @details:
  *      执行流程：request -> controller -> service -> dao
+ *      包括信息：免责声明，贡献者信息
 */
 
 @RestController

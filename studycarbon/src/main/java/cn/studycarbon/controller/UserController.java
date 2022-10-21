@@ -35,6 +35,7 @@ public class UserController {
     */
     @PostMapping("/login")
     public ModelAndView userLogin() {
+        logger.debug("do login...");
         return null;
     }
 
