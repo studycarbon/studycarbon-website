@@ -268,10 +268,10 @@
 
     <div class="wrapper">
         <div class="regcontent">
-            <form>
-                <span style="margin-top:50px;">*用户名:</span> <input type="text" value="请输入用户名" class="reginput"><br/>
-                <span>*邮箱:</span> <input type="text" value="邮箱" class="reginput"> <br/>
-                <span>*密码: </span> <input type="text" value="密码" class="reginput"> <br/>
+            <form action="http://localhost/user/reg" method="post">
+                <span style="margin-top:50px;">*用户名:</span> <input type="text" value="请输入用户名" class="reginput" name="username"><br/>
+                <span>*邮箱:</span> <input type="text" value="邮箱" class="reginput" name="email"> <br/>
+                <span>*密码: </span> <input type="text" value="密码" class="reginput" name="password"> <br/>
                 <span>*确认密码:</span> <input type="text" vlaue="确认密码" class="reginput"> <br/>
                 <input type="submit" class="regsubmit">
             </form>
@@ -301,16 +301,16 @@
         </div>
 
         <div class="footer2">
-            <h4>@2022-2022 studycarbon.cn Carbon中文网, 中国Carbon社区, 致力于构建完善的Carbon中文社区, Carbon爱好者的学习家园</h4>
-            <h4>采用SpringBoot编写网站, 后续将采用C++的框架编写网站</h4>
+            <p>@2022-2022 studycarbon.cn Carbon中文网, 中国Carbon社区, 致力于构建完善的Carbon中文社区, Carbon爱好者的学习家园</p>
+            <p>采用SpringBoot编写网站, 后续将采用C++的框架编写网站</p>
         </div>
 
         <div class="footer3">
-            <h4>Copyright &copy; 2022-2022 Carbon中文网 版权所有</h4>
+            <p>Copyright &copy; 2022-2022 Carbon中文网 版权所有</p>
         </div>
 
         <div class="footer4">
-            <h4>***#####***</h4>
+            <p>***#####***</p>
         </div>
     </div>
 </body>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /*
  * @brief: 从数据库中查询studycarbon网站的信息，发送给请求方
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 */
 
 @RestController
-@RequestMapping("/studycarboninfo")
+@RequestMapping("/info")
 public class StudyCarbonInfoController {
 
     public static Logger logger = LoggerFactory.getLogger(StudyCarbonInfoController.class);
@@ -31,6 +32,24 @@ public class StudyCarbonInfoController {
         StudyCarbonInfo info =  studyCarbonInfoService.getInfo();
         logger.info("studycarbon info:"+info);
         return info;
+    }
+
+    @GetMapping("/aboutview")
+    public ModelAndView aboutView() {
+        logger.debug("info about...");
+        return new ModelAndView("front/pages/about");
+    }
+
+    @GetMapping("/disclaimerveiw")
+    public ModelAndView disclaimerView() {
+        logger.debug("info disclaimer...");
+        return new ModelAndView("front/pages/disclaimer");
+    }
+
+    @GetMapping("/contributionview")
+    public ModelAndView contributionView() {
+        logger.debug("info contribution...");
+        return new ModelAndView("front/pages/contribution");
     }
 
 }

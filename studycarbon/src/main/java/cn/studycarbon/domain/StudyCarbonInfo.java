@@ -2,6 +2,7 @@ package cn.studycarbon.domain;
 
 public class StudyCarbonInfo {
     private int id;
+
     private String about;
 
     public int getId() {
