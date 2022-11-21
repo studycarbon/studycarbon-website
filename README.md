@@ -106,3 +106,212 @@ public class HelloWorldController {
 ## CH04-开发环境配置
 
 暂无内容~~~
+
+## CH05-集成Thymeleaf
+
+### Thymeleaf： java的模板引擎，
+
+* 能够处理html，xml，javascript，css
+* 自然模板。原型即界面
+* 语法优雅一动。OGNL，SpringEL
+* 遵循Web标准。支持HTML5
+
+### Thymeleaf标准方言
+
+* <span th:text="...">
+
+* <span data-th-text="...">
+
+* 一个简单的thymeleaf的示例
+
+  需要引入th的命名空间才可以使用thymleaf的th标签
+
+```html
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        ....
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/gtvg.css" th:href="@{/css/gtvg.css}"/>
+    </head>
+    <p th:text="#{home.welcome}">
+        Welcome to our grocery store!
+    </p>
+</html>
+```
+
+![image-20221121180809689](./docs_Img/image-20221121180809689.png)
+
+#### 变量表达式
+
+语法：${...}
+
+```html
+<span th:text="${book.author.name}"></span>
+```
+
+#### 消息表达式
+
+语法：#{...}
+
+也称之为文本外部话，或者国际化
+
+```html
+<table>
+    ...
+    <th th:text="#{header.address.city}">...</th>
+    <th th:text="#{header.address.country}">...</th>
+    ...
+</table>
+```
+
+#### 选择表达式
+
+语法：*{...}
+
+```html
+<div th:object="${book}">
+    ...
+    <span th:text="*{title}">...</span>
+    ...
+</div>
+```
+
+#### 链接表达式
+
+语法：@{...}
+
+```html
+<!--相对于应用程序上下文-->
+<a th:href="@{../documents/report}">...</a>
+
+<!--相对于服务器-->
+<a th:href="@{~/documents/report}">...</a>
+
+<!--相对于协议-->
+<a th:href="@{//static.mycompany.com/res/initial}">...</a>
+
+<!--link表达式绝对的-->
+<a th:href="@{http://www.mycompany.com/main}">...</a>
+```
+
+#### 分段表达式
+
+语法: th:insert 或者 th:replace
+
+```html
+<!DOCTYPE html>
+<html xmls:th="http//www.thymeleaf.org">
+    <body>
+        <div th:fragment="copy">
+            &copy;2017<a href="https://waylau.com">waylau.com</a>
+        </div>
+    </body>
+</html>
+```
+
+```html
+<body>
+    ...
+    <div th:insert="~{footer::copy}">
+        
+    </div>
+    ...
+</body>
+```
+
+#### 字面量
+
+```html
+<p>
+    now you are looking at 
+    <span th:text="working web application">tmplate file</span>
+</p>
+```
+
+#### 数字
+
+```html
+<p>
+    the year is <span th:text="2013">1492</span>
+</p>
+<p>
+    in two years, it will be <span th:text="2013+2">1494</span>
+</p>
+```
+
+#### 布尔
+
+```html
+<div th:if="${user.isAdmin()} == false">
+    ...
+</div>
+```
+
+#### null
+
+```html
+<div th:if="${variable.something} == null">...
+</div>
+```
+
+#### 算术操作
+
++，-，*，/,%
+
+```shell
+<div th:with="isEven=$(${prodStat.count} % 2 == 0)"
+```
+
+#### 比较和等价
+
+比较>,<,>=,<=(gt,lt,ge,le)
+
+```html
+<ul class="pagination" data-th-if="${page.totalPages le 7}">
+    
+</ul>
+```
+
+#### 等价 ==，!= （eq,ne)
+
+```html
+<option data-th-each="i : ${#arrays.toIntegerArray(5,10,40,100)}" data-th-value="${i}" data-th-selected="${i eq page.size}" data-th-text="${i}"></option>
+```
+
+#### 条件运算符
+
+```html
+<tr th:class="${row.even}?'even':'odd'">
+...
+</tr>
+```
+
+### span 无操作
+
+```html
+<span th:text="${user.name?:_}">no user authenticated</span>
+```
+
+#### 设置属性值
+
+```html
+<form action="subscribe.html" th:attr="action=@{/subscribe}">
+    <fieldset>
+        <input type="text" name="email"/>
+        <input type="submit" value="Subscribe!" th:attr="value=#{subscribe.submit}"/>
+    </fieldset>
+</
+    form>
+```
+
+```html
+<form action="subscribe.html" th:action="@{/subscribe}">
+    
+</form>
+```
+
+```html
+<input type="submit" value="Subscirbe!" th:value="#{subscribe.submit}"/>
+```
+
+
+
