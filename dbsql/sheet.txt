@@ -12,11 +12,11 @@ user:
 
 
 aritcle:
-	id
-	userid
-	title
-	detail
-	abstract
+	id       // 文章id
+	userid //文章所属用户id
+	title    // 文章标题
+	detail //文章内容
+	summary  // 文章摘要信息
 	state //文章状态
 	
 	

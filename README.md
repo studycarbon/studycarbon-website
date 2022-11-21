@@ -1,22 +1,67 @@
-# stduycarbon-website
+# Carbon 中文网
 
-## 介绍
+## CH01-概述
 
-carbon中文网网站，建立良好的 Carbon 语言中文社区，促进 Carbon 语言的交流和发展。
+功能：注册博主，发博客，评论，点赞，全文检索，文件上传...
 
-## 历史
+技术：前端，后端，数据库，NoSql，文件存储，大数据...
 
-* 2022/08/29 开始筹建carbon中文网 
+### 功能
 
-* 2022/10/18 采用springboot做构建基本的项目框架
+![image-20221121160236747](./docs_Img/image-20221121160236747.png)
 
-* 2022/10/18 第三方库editor.md参考资料
+![image-20221121160449229](./docs_Img/image-20221121160449229.png)
 
-  [(3条消息) 基于JavaWeb的MarkDown编辑器editor.md的使用_梁云亮的博客-CSDN博客_markdown web编辑器](https://blog.csdn.net/lianghecai52171314/article/details/102930664)
+![image-20221121160553262](./docs_Img/image-20221121160553262.png)
 
-  [(3条消息) javaweb项目中使用markdown编辑器插件Editor_JabinJava的博客-CSDN博客_markdown web插件](https://blog.csdn.net/JabinJava/article/details/88375511)
+![image-20221121160652340](./docs_Img/image-20221121160652340.png)
 
-* 2022/10/21 支持返回页面
+![image-20221121160743285](./docs_Img/image-20221121160743285.png)
 
-## 关于
+![image-20221121160807231](./docs_Img/image-20221121160807231.png)
+
+![image-20221121160837452](./docs_Img/image-20221121160837452.png)
+
+![image-20221121160952581](./docs_Img/image-20221121160952581.png)
+
+![image-20221121161032447](./docs_Img/image-20221121161032447.png)
+
+### 技术
+
+![image-20221121161546668](E:\CodeLibraries\studycarbon-website\docs_Img\image-20221121161546668.png)
+
+![image-20221121161728317](E:\CodeLibraries\studycarbon-website\docs_Img\image-20221121161728317.png)
+
+注：
+
+>不采用H2，直接使用 Mysql，前期暂时也不适用 MongoDB，不使用 Hibernate，直接使用 Mybatis，不使用Gradle，直接采用maven，后续图片请更改。
+
+### Spring Boot 是什么？
+
+> * 为所有spring开发提供一个更快，更广泛的入门体验
+> * 开箱即用，不适合时候也可以快速抛弃
+> * 提供一系列大型项目常用的非功能性特征
+> * 零配置（不需要xml配置，遵循“约定大于配置”）
+
+### Spring Boot 简化开发
+
+> 抛弃了传统JavaEE项目繁琐的配置，学习过程，让企业级应用开发变得简单。
+
+### Spring Boot 和其他框架的关系
+
+![image-20221121163016167](E:\CodeLibraries\studycarbon-website\docs_Img\image-20221121163016167.png)
+
+## CH02-开启Spring Boot的第一个项目
+
+### 环境配置
+
+>jdk8
+>
+>apache-maven-3.6.1
+>
+>IntelliJ IDEA 2021.2
+
+#### 创建studycarbon项目
+
+![image-20221121164313794](E:\CodeLibraries\studycarbon-website\docs_Img\image-20221121164313794.png)
 
