@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xml:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>header</title>
+</head>
+<body>
+    <!--格式 html所在路径::片段名-->
+    <div th:replace="~{thymeleafUser/header::header}"></div>
+    <h3 th:text="${userModel.title}">这里是标题...</h3>
+
+    <form action="/thymeleafUsers" th:action="@{/thymeleafUsers}" method="post" th:object="${userModel.user}">
+        <input type="hidden" name="id" th:value="*{id}">
+        名称:<input type="text" name="name" th:value="${userModel.user.name}"> <br/>
+        邮箱:<input type="text" name="email" th:value="*{email}"> <br/>
+        <input type="submit" value="提交">
+    </form>
+
+    <div th:replace="~{thymeleafUser/footer::footer}"></div>
+</body>
+</html>

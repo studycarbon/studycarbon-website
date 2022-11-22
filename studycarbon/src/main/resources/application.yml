@@ -1,0 +1,7 @@
+spring:
+  thymeleaf:
+    cache: false    #不使用缓存，热加载
+    prefix: classpath:/templates/
+    encoding: UTF-8 #编码格式
+    suffix: .html   #模板后缀名
+    mode: HTML     #html5标准已经被抛弃，请使用html模型

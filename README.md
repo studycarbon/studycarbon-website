@@ -285,7 +285,7 @@ public class HelloWorldController {
 </tr>
 ```
 
-### span 无操作
+#### span 无操作
 
 ```html
 <span th:text="${user.name?:_}">no user authenticated</span>
@@ -313,5 +313,283 @@ public class HelloWorldController {
 <input type="submit" value="Subscirbe!" th:value="#{subscribe.submit}"/>
 ```
 
+```html
+<input type="checkbox" name="option2" checked> //html
+<input type="checkbox" name="option1" checked="checked">//xhtml
+<input type="checkbox" name="active" th:checked="${user.active}"> 
+```
+
+#### 迭代器
+
+```html
+<li th:each="book : ${books}" th:text="${book.title}"> En las Orillas del Sar</li>
+```
+
+状态变量：
+
+>index,count,size,current,even/odd,first,last
+
+```html
+<table>
+    <tr>
+        <th>name</th>
+        <th>price</th>
+        <th>in stock</th>
+    </tr>
+    <tr th:each="prod,iterStat : ${prods}" th:class="${iterStat.odd}?'odd'">
+        <td th:text="${prod.name}">onions</td>
+        <td th:text="${prod.price}">2.41</td>
+        <td th:text="${prod.inStock}?#{true}:#{false}">yes</td>
+    </tr>
+</table>
+```
+
+#### 条件语句
+
+```html
+<a href="comments.html" th:href="@{/product/comments(prodId=$(prod.id))}"></a>
+<th:if="${not #list.isEmpty(prod.comments)}">view</th:if>
+```
+
+```html
+<a href="comments.html" th:href="@{/product/comments(prodId=$(prod.id))}"></a>
+<th:unless="${not #list.isEmpty(prod.comments)}">view</th:if>
+```
+
+```html
+<div th:switch="${user.role}">
+    <p th:case="admin">
+        user is an admin
+    </p>
+    <p th:case="#{roles.manager}">
+        user is an manager
+    </p>
+    <p th:case="*">
+        user is other
+    </p>
+</div>
+```
+
+#### 模板布局
+
+定义片段
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org">
+    <body>
+        <div th:fragment="copy">
+            &copy;2017<a href="https://waylau.com">waylau.com</a>
+        </div>
+    </body>
+</html>
+```
+
+```html
+<div id="copy-section">
+    &copy;2017<a href="https://waylau.com">waylau.com</a>
+</div>
+```
 
 
+
+引用片段
+
+```html
+<body>
+    ...
+    <div th:insert="~{footer :: copy}">
+        
+    </div>
+    ...
+</body>
+```
+
+```html
+<body>
+    ...
+    <div th:insert="~{footer :: #copy-section">
+        
+    </div>
+    ...
+</body>
+```
+
+th:insert,th:replace,th:include区别：
+
+```html
+<body>
+    <div th:insert="footer::copy">
+    </div>
+    <div th:replace="footer::copy">
+    </div>
+    <div th:include="footer::copy">
+    </div> 
+</body>
+```
+
+#### 属性优先级
+
+当在同一个标签中写入多个th:*属性时，会发生什么？
+
+```html
+<ul>
+    <li th:each="item : ${items}" th:text="${item.description}"> Item description here....</li>
+</ul>
+```
+
+| order | feature      | attributes                           |
+| ----- | ------------ | ------------------------------------ |
+| 1     | 片段引用     | th:insert/th:replace                 |
+| 2     | 遍历         | th:each                              |
+| 3     | 条件语句     | th:if/th:unless/th:swich/th:case     |
+| 4     | 本地变量定义 | th:object/th:with                    |
+| 5     | 通常属性设置 | th:attr/th:attrprepend/th:attrappend |
+| 6     | 特殊属性设置 | th:value/th:href/th:src ...          |
+| 7     | 文本         | th:text/th:utext                     |
+| 8     | 片段声明     | th:fragment                          |
+| 9     | 片段移除     | th:remove                            |
+
+#### 注释
+
+* thymeleaf解析器级别注释快
+
+删除<!--/*-->和<!--*/-->之间内容
+
+```html
+<!--/*-->
+...
+<!--*/-->
+```
+
+* 原型注释块
+
+当模板静态打开时，原型注释快所注释代码将被注释，模板执行时，这些注释代码，将被显示出来。
+
+```html
+<!--/**/
+...
+/*/-->
+```
+
+#### 内联
+
+[[...]]或[(...)]分别对应于th:text和th:utext
+
+```html
+<p>
+    the msg is "[(${msg})]"
+</p>
+
+<p>
+    the msg is "<b>great!</b>"
+</p>
+
+```
+
+```html
+<p>
+    the msg is "[(${msg})]"
+</p>
+
+<p>
+    the msg is "&lt;b&gt;great!&lt;/b&gt;"
+</p>
+```
+
+禁用内联
+
+```html
+<p th:inline="none">
+    a double array looks like this:[[1,2,3],[4,5]]!</p>
+</p>
+```
+
+javascript内联
+
+```html
+<script>
+    ...
+    var username=/*[[${session.user.name}]]*/ "Gertrud kiwifruit"
+    ...
+</script>
+```
+
+css内联
+
+```html
+classname='main elems'
+align='center'
+<style>
+	.[[${classname}]] {
+		text-align:[[${align}]]
+	}
+</style>
+```
+
+#### 表达式基本对象
+
+基本对象
+
+>#ctx:上下文对象。是org.thymeleaf,context.IContext或者org.thymeleaf.context.IWebContext实现
+>
+>#locale
+>
+>param
+>
+>session
+>
+>application
+
+web上下文对象
+
+>#request
+>
+>#session
+>
+>#servletCtx
+
+### thymeleaf和Spring Boot集成
+
+pom.xml添加如下内容
+
+>```xml
+><dependency>
+>   <groupId>org.springframework.boot</groupId>
+>   <artifactId>spring-boot-starter-thymeleaf</artifactId>
+></dependency>
+>```
+
+application.yml（需要新建这个文件，同时删除application.properties文件)并添加如下内容：
+
+```
+spring:
+  thymeleaf:
+    cache: false 
+    prefix: classpath:/templates/
+    encoding: UTF-8 #编码
+    suffix: .html #模板后缀
+    mode: HTML #模板
+```
+
+配置说明：
+
+ **cache**这一行是将页面的缓存关闭，不然我们改变页面之后可能不能及时看到更改的内容，默认是true。
+
+ **prefix**是配置thymeleaf模板所在的位置。
+
+ **encoding** 是配置thymeleaf文档的编码，后面的就不说了
+
+注：更详细情况请参考：[SpringBoot系列（六）集成thymeleaf详解版 - 全栈学习笔记 - 博客园 (cnblogs.com)](https://www.cnblogs.com/swzx-1213/p/12726432.html)
+
+#### thymeleaf实战
+
+> ThymeleafUserController
+>
+> ThymeleafUserDao
+>
+> ThymeleafUser
+>
+> template/ThymeleafUser
+
+## CH06 - Spring Data JPA

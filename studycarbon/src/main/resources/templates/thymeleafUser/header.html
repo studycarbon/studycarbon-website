@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xml:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>header</title>
+</head>
+<body>
+    <div th:fragment="header" style="height: 100px;background-color: gray;border: 1px solid white;">
+        <p>this is header!!!!</p>
+        <!--使用@{~/thymeleafUsers}覆盖href的值-->
+        <a href="/thymeleafUsers" th:href="@{~/thymeleafUsers}">首页</a>
+    </div>
+</body>
+</html>
