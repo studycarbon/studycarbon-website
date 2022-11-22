@@ -1,4 +1,4 @@
-package cn.studycarbon.repo;
+package cn.studycarbon.repository;
 
 import cn.studycarbon.domain.ThymeleafUser;
 import org.springframework.data.repository.CrudRepository;
