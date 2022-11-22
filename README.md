@@ -593,3 +593,121 @@ spring:
 > template/ThymeleafUser
 
 ## CH06 - Spring Data JPA
+
+* jpa简介
+
+* spring data jpa 用法介绍
+* spring data jpa,hibernate与springboot集成
+* 数据持久化实战
+
+### jpa简介
+
+#### 什么是jpa？
+
+* jpa（java persistence api)用于管理java EE和java SE环境中的持久化，以及对象/映射关系的Java api
+* 最新规范为"jsr 338:java persistence 2.1" https://jcp.org/en/jsr/detail?id=338
+* 实现:eclipseLink,Hibernate，apache OpenJPA
+
+#### jpa核心概念
+
+* 实体表示关系数据库中的表
+* 每个实体示例对应于该表中的行
+* 类必须用javax.persistence.Entity注解
+
+* 类必须有一个public或者protected无参数的构造函数
+
+* 实体实例被当作值以分离对象方式进行传递（如通过会话bean的远程业务接口），则该分类必须实现Serializable接口
+
+* 唯一对象标识符：简单主键（javax.persistence.Id),复合主键（javax.persistence.EmbeddedId和javax.persistence.IdClass)
+
+* 关系
+
+  * 一对一 @OneToOne
+  * 一对多 @OneToMany
+  * 多对一 @ManyToOne
+  * 多对多 @ManyToMany
+
+* EntityManager
+
+  * 定义用于与持久性上下文交互的方法
+  * 创建和删除持久实体实例，通过实体的主键查找实体
+  * 允许在实体上运行查询
+
+  * 获取EntityManager实例
+
+    ```java
+    @PersistenceUnit
+    EntityManagerFactory emf;
+    EntityManager em;
+    @Resource
+    UserTransaction utx;
+    ...
+    em = emf.createEntityManager();
+    try {
+        utx.begin();
+        em.persist(someEntity);
+        em.merge(AnotherEntity);
+        em.remove(ThirdEntity);
+        utx.commit()
+    } catch(Exception e) {
+        utx.rollback();
+    }
+    ```
+
+  * 查找实体
+
+    ```
+    @PersistenceContext
+    EntityManage em;
+    public void enterOrder(int custID, CustomerOrder newOrder) {
+    	Customer cust = em.find(Customer.class, custID);
+    	cust.getOrders().add(newOrder);
+    	newOrder.setCustomer(cust);
+    }
+    ```
+
+#### Spring Data jpa简介
+
+* 是更改spring data 家族的一部分
+
+* 对基于jpa的数据访问层增强支持
+
+* 更容易构建基于使用spring数据访问技术栈的应用程序
+
+* Spring data jpa常用接口
+
+  CrudRepository
+
+  ```java
+  public interface CrudRepository<T, ID extends Serializable> extends REpository<T,ID> {
+      <S extends T> S save(S entity);
+      T findOne(ID primaryKey);
+      Iterable<T> findAll();
+      Long count();
+      void delete(T entity);
+      boolean exists(ID primaryKey);
+      ....
+  }
+  ```
+
+  PagingAndSortingRepository:实现排序和分页的
+
+  ```java
+  public interface PaingAndSortingRepository<T,ID extends Serializable> extends CrudRepository<T,ID> {
+      Iterable<T> findAll(Sort sort);
+      Page<T> findAll(Pageable pageable);
+  }
+  ```
+
+* Spring Data Jpa自定义接口
+
+```java
+public interface PersonRepositoy extends Repository<User, Long> {
+    List<Person> findByEmailAddressAndLastName(EmailAddress emailAddress, String lastname);
+    List<Person> findDistinctPeopleByLastNameOrFirstName(String lastname,String firstname);
+    ....
+}
+```
+
+
+
