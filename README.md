@@ -790,3 +790,45 @@ mysql创建blog数据库
 ![image-20221122190442580](./docs_Img/image-20221122190442580.png)
 
 ![image-20221122190509482](./docs_Img/image-20221122190509482.png)
+
+### CH07-ElasticSearch
+
+#### ElasticSerch 简介：
+
+高度可扩展的开源全文搜索和分析引擎
+
+快速地，近实时地对大数据进行存储，搜索和分析
+
+用来支撑有复杂的数据搜索需求的企业级应用
+
+#### ElasticSearch特点
+
+分布式，高可用，多类型，多api，面向文档，近实时，基于lucene,基于apache协议
+
+#### ElasticSearch核心概念
+
+近实时：一般延迟在1秒左右
+
+集群：一个或者多个，名称默认为ElasticSearch
+
+节点：集群中的单台服务器，可自定义节点名称
+
+索引：类似于字典中的目录
+
+类型：对产品进行分类
+
+文档：索引的基本单位，具体的产品的信息，对应实体
+
+分片：数据比较大时候，需要进行分片
+
+副本：对原数据进行拷贝，增加吞吐量和搜索量
+
+#### ElasticSearch和spring boot集成
+
+配置环境
+
+>  Elasticsearch 2.4.4
+>
+> spring data Elasticsearch 2.1.3.RELEASE 
+>
+> jna 4.3.0 访问原生的一些东西，es需要这个依赖
