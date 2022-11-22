@@ -5,3 +5,19 @@ spring:
     encoding: UTF-8 #编码格式
     suffix: .html   #模板后缀名
     mode: HTML     #html5标准已经被抛弃，请使用html模型
+# h2配置项
+  h2:
+    console:
+      enabled: true
+
+#datasource
+  datasource:
+    url: jdbc:mysql://localhost/blog?userSSL=false&serverTimezone=UTC&characterEncoding=utf-8 #设置jdbc url
+    username: root                              #用户名
+    password: 123456                            #密码
+    driver-class-name: com.mysql.cj.jdbc.Driver # 驱动项配置
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop

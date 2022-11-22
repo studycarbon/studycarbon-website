@@ -709,5 +709,84 @@ public interface PersonRepositoy extends Repository<User, Long> {
 }
 ```
 
+### spring data jpa, hibernate与spring boot集成
 
+#### 配置环境：
 
+>mysql community server 5.7.17
+>
+>spring data jpa 1.11.1.Release
+>
+>hibernate 5.2.8.final
+>
+>mysql connector/j 6.0.5
+
+#### 修改pom.xml
+
+>```
+><dependency>
+>   <groupId>org.springframework.boot</groupId>
+>   <artifactId>spring-boot-starter-data-jpa</artifactId>
+></dependency>
+>
+><dependency>
+>   <groupId>mysql</groupId>
+>   <artifactId>mysql-connector-java</artifactId>
+></dependency>
+>```
+
+#### 直接启动报错
+
+![image-20221122174101027](E:\CodeLibraries\studycarbon-website\docs_Img\image-20221122174101027.png)
+
+参考博客：[开发工具 - springboot整合h2数据库_祈望每天自然醒的博客-CSDN博客_springboot整合h2](https://blog.csdn.net/yeahPeng11/article/details/120257881?ops_request_misc=%7B%22request%5Fid%22%3A%22166911009716800180644098%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&request_id=166911009716800180644098&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-120257881-null-null.142^v66^control,201^v3^control_2,213^v2^t3_esquery_v3&utm_term=springboot h2数据库&spm=1018.2226.3001.4187)
+
+#### 添加h2依赖后，启动正常.
+
+```
+<dependency>
+	<groupId>com.h2database</groupId>
+	<artifactId>h2</artifactId>
+	<scope>runtime</scope>
+	<version>1.4.193</version>
+</dependency>
+```
+
+#### 启动完成后，在浏览器中输入 [localhost:8080/h2-console](http://localhost:8080/h2-console)
+
+![image-20221122175126722](C:\Users\TS\AppData\Roaming\Typora\typora-user-images\image-20221122175126722.png)
+
+#### 在yml中启用控制台
+
+```
+spring:
+  h2:
+    console:
+      enabled: true
+
+```
+
+#### mysql整合jpa
+
+pom.xml配置
+
+```yml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/blog?userSSL=false&serverTimezone=UTC&characterEncoding=utf-8 #设置jdbc url
+    username: root                              #用户名
+    password: 123456                            #密码
+    driver-class-name: com.mysql.cj.jdbc.Driver # 驱动项配置
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+
+```
+
+mysql创建blog数据库
+
+![image-20221122190442580](./docs_Img/image-20221122190442580.png)
+
+![image-20221122190509482](./docs_Img/image-20221122190509482.png)
