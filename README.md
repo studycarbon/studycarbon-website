@@ -956,3 +956,29 @@ spring security
 Spring security简介：
 
 >spring security简介
+
+spring security和spring boot集成
+
+>spring security 4.2.2.RELEASE
+>
+>thymeleaf spring security 3.0.2.release
+>
+>pom.xml添加如下内容：
+>
+>```
+><dependency>
+>   <groupId>org.springframework.boot</groupId>
+>   <artifactId>spring-boot-starter-security</artifactId>
+></dependency>
+>
+><dependency>
+>   <groupId>org.thymeleaf.extras</groupId>
+>   <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+>   <version>3.0.2.RELEASE</version>
+></dependency>
+>```
+
+## CH12-博客系统整体框架实现
+
+## CH13-博客系统的用户管理实现
+
