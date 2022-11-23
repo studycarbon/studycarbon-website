@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--用data-th-fragment标识一个片段-->
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      data-th-fragment="header">
 <head>
     <meta charset="UTF-8">
-    <title>header</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon 中文网</title>
+
+    <!--bootstrap专用链接，参考菜鸟教程，可以参考如下链接-->
+    <!--https://www.runoob.com/bootstrap/bootstrap-environment-setup.html-->
+    <link rel="stylesheet"  th:href="@{/css/bootstrap.min.css}">
+    <!--    <link rel="stylesheet"  th:href="@{/css/blog.css}">-->
+    <!--    <script th:src="@{/js/jquery-3.1.1.min.js}" />-->
+    <!--    <script th:src="@{/js/bootstrap.min.js}" />-->
 </head>
 <body>
+    <nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md">
+        <div class="container">
 
+            <!--直接定向到首页内容-->
+            <a class="navbar-brand" href="/">
+                Navbar-Brand
+            </a>
+
+            <div class="collapse navbar-collapse" id="navbarsContainer">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--登录的用户-->
+            <div sec:authorize="isAuthenticated()"  class="row" >
+                <div>
+                    <span sec:authentication="name" class="text-white"/>
+                </div>
+<!--                退出登录-->
+                <form action="/logout" th:action="@{/logout}" method="post">
+                    <input class="btn btn-outline-success " type="submit" value="退出">
+                </form>
+            </div>
+
+<!--            未登录的用户-->
+            <div sec:authorize="isAnonymous()">
+                <a href="/login" class="btn btn-outline-success my-2 my-sm-0" type="submit">登录</a>
+            </div>
+
+        </div>
+    </nav>
 </body>
 </html>

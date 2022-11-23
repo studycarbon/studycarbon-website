@@ -4,21 +4,7 @@
 <!--xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"-->
 <!--Thymeleaf整合Spring Security，解析sec标签没有效果：
     https://blog.csdn.net/qq_41700374/article/details/87010053-->
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carbon 中文网</title>
-
-    <!--bootstrap专用链接，参考菜鸟教程，可以参考如下链接-->
-    <!--https://www.runoob.com/bootstrap/bootstrap-environment-setup.html-->
-    <link rel="stylesheet"  th:href="@{/css/bootstrap.min.css}">
-<!--    <link rel="stylesheet"  th:href="@{/css/blog.css}">-->
-<!--    <script th:src="@{/js/jquery-3.1.1.min.js}" />-->
-<!--    <script th:src="@{/js/bootstrap.min.js}" />-->
-
-</head>
-
+<head th:replace="~{fragments/header :: header}">
 <body>
 
 <!--    <h4>内容区域</h4>-->
@@ -33,6 +19,9 @@
             <p>未有用户登录</p>
         </div>
     </div>
+
+    <!--底部状态栏-->
+    <div th:replace="~{fragments/footer::footer}"/>
 
 </body>
 
