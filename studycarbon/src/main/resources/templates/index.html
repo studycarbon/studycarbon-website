@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<!--xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"-->
+<!--Thymeleaf整合Spring Security，解析sec标签没有效果：
+    https://blog.csdn.net/qq_41700374/article/details/87010053-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon 中文网</title>
+
+    <!--bootstrap专用链接，参考菜鸟教程，可以参考如下链接-->
+    <!--https://www.runoob.com/bootstrap/bootstrap-environment-setup.html-->
+    <link rel="stylesheet"  th:href="@{/css/bootstrap.min.css}">
+<!--    <link rel="stylesheet"  th:href="@{/css/blog.css}">-->
+<!--    <script th:src="@{/js/jquery-3.1.1.min.js}" />-->
+<!--    <script th:src="@{/js/bootstrap.min.js}" />-->
+
+</head>
+
+<body>
+
+<!--    <h4>内容区域</h4>-->
+    <div class="container blog-content-container">
+        <div sec:authorize="isFullyAuthenticated()">
+            <p>已有登录用户</p>
+            <p>登录用户为:<span sec:authentication="name"/></p>
+            <p>用户角色为:<span sec:authentication="principal.authorities"/></p>
+        </div>
+
+        <div sec:authorize="isAnonymous()">
+            <p>未有用户登录</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

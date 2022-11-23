@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+    <div class="container blog-content-container">
+        <form th:action="@{/login}" method="post">
+            <h2>请登录</h2>
+            <div class="form-group col-md-5">
+                <label for="username" class="col-form-label">账号</label>
+                <input type="text" class="form-control" id="username" name="username"/>
+            </div>
+            <div class="form-group col-md-5">
+                <label for="password" class="col-form-label">密码</label>
+                <input type="password" class="form-control" id="password" name="password"/>
+            </div>
+            <div class="form-group col-md-5">
+                <button type="submit" class="btn btn-primary">登录</button>
+            </div>
+            <div class="col-md-5" th:if="${loginError}">
+                <p class="blog-label-error" th:text="${errorMsg}"></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
