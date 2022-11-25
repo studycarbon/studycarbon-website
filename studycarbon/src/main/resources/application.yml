@@ -20,7 +20,8 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      #ddl-auto: create-drop # 参考https://www.cnblogs.com/qingmuchuanqi48/p/11616145.html
+      ddl-auto: update
 
   #https://blog.csdn.net/ghdqfhw/article/details/113687869
   #采用配置，发现配置还是被丢弃，使用推荐的一些配置

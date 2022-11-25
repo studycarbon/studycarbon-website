@@ -3,7 +3,7 @@ package cn.studycarbon.controller;
 // ThymeleafController：展示thymeleaf的用法
 
 import cn.studycarbon.domain.ThymeleafUser;
-import cn.studycarbon.repository.ThymeleafUserRepo;
+import cn.studycarbon.repository.ThymeleafUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ public class ThymeleafUserController {
    // private ThymeleafUserDao thymeleafUserDao;
 
     @Autowired
-    private ThymeleafUserRepo thymeleafRepo;
+    private ThymeleafUserRepository thymeleafRepo;
 
     // 直接映射 /thymeleafUsers
     @GetMapping

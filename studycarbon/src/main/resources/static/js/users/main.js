@@ -9,9 +9,8 @@
  
 // DOM 加载完再执行
 $(function() {
-	
-	var _pageSize; // 存储用于搜索
-	
+	// 存储用于搜索
+	var _pageSize;
 	// 根据用户名、页面索引、页面大小获取用户列表
 	function getUersByName(pageIndex, pageSize) {
 		 $.ajax({ 
@@ -98,7 +97,7 @@ $(function() {
 		var csrfToken = $("meta[name='_csrf']").attr("content");
 		var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 		
-		
+		// 组建url，设置type，发送之前进行处理
 		$.ajax({ 
 			 url: "/users/" + $(this).attr("userId") , 
 			 type: 'DELETE', 
