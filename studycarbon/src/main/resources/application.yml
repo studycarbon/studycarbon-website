@@ -31,3 +31,6 @@ spring:
     connection-timeout: 1s  # 连接超时时间
     socket-timeout: 30s #
     uris: ${ES_HOST:localhost}:${ES_PORT:9200} # 端口位置
+
+#  main:
+#    allow-bean-definition-overriding: true
