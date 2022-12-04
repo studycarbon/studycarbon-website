@@ -74,6 +74,7 @@ public class UserspaceController {
     @PostMapping("/{username}/profile")
     @PreAuthorize("authentication.name.equals(#username)")
     public String saveProfile(@PathVariable("username") String username, User user) {
+        logger.info("save user profile:username = "+username);
         User originalUser = userService.getUserById(user.getId());
         originalUser.setEmail(user.getEmail());
         originalUser.setName(user.getName());
