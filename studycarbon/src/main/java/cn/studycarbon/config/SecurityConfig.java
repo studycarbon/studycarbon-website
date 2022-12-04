@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled=true)  // 处理@PreAuthorize 不起作用 参考：https://blog.csdn.net/weixin_41195786/article/details/84439384
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String KEY = "studycarbon.cn";
@@ -48,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admins/**").hasRole("ADMIN") // admins需要登录
                 .and()
                 .formLogin()
-                .loginPage("/login").failureUrl("/login-error");// 自定义登录页面
+                .loginPage("/login").failureUrl("/login-error")// 自定义登录页面
+                .and().exceptionHandling().accessDeniedPage("/403"); // 处理异常，拒绝范文就重定向到 403 页面
     }
 
     @Autowired

@@ -1,6 +1,5 @@
 package cn.studycarbon.controller;
 
-import cn.studycarbon.Application;
 import cn.studycarbon.domain.Blog;
 import cn.studycarbon.domain.Catalog;
 import cn.studycarbon.domain.User;
@@ -104,11 +103,9 @@ public class UserspaceController {
     @PreAuthorize("authentication.name.equals(#username)")
     public ResponseEntity<Response> saveAvatar(@PathVariable("username") String username, @RequestBody User user) {
         String avatarUrl = user.getAvatar();
-
         User originalUser = userService.getUserById(user.getId());
         originalUser.setAvatar(avatarUrl);
         userService.saveOrUpdateUser(originalUser);
-
         return ResponseEntity.ok().body(new Response(true, "处理成功", avatarUrl));
     }
 
