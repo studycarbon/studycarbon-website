@@ -32,5 +32,5 @@ spring:
     socket-timeout: 30s #
     uris: ${ES_HOST:localhost}:${ES_PORT:9200} # 端口位置
 
-#  main:
-#    allow-bean-definition-overriding: true
+  main:
+    allow-circular-references: true

@@ -1,11 +1,14 @@
 package cn.studycarbon.controller;
 
+import cn.studycarbon.Application;
 import cn.studycarbon.domain.Authority;
 import cn.studycarbon.domain.User;
 import cn.studycarbon.service.AuthorityService;
 import cn.studycarbon.service.UserService;
 import cn.studycarbon.util.ConstraintViolationExceptionHandler;
 import cn.studycarbon.vo.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,9 +29,14 @@ import java.util.List;
 @RequestMapping("/users")
 //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class UserController {
+    // 日志
+    private static Logger logger = LoggerFactory.getLogger(UserController.class);
+
+    // 用户服务
     @Autowired
     private UserService userService;
 
+    // 权限服务
     @Autowired
     private AuthorityService authorityService;
 
@@ -60,7 +68,7 @@ public class UserController {
                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                              @RequestParam(value = "name", required = false, defaultValue = "") String name,
                              Model model) {
-        System.out.println("===================================================list===================================================");
+        logger.debug("===========================================================list========================================================");
         Pageable pageable = PageRequest.of(pageIndex, pageSize);
         Page<User> page = userService.listUsersByNameLike(name, pageable);
 
@@ -74,10 +82,10 @@ public class UserController {
     // 获取form表单页面
     @GetMapping("/add")
     public ModelAndView createForm(Model model) {
-        System.out.println("===================================================list===================================================");
+        //System.out.println("===================================================list===================================================");
         User user = new User(null, null, null);
         model.addAttribute("user",user);
-        System.out.println(user);
+        //System.out.println(user);
         return new ModelAndView("users/add", "userModel", model);
     }
 
@@ -97,8 +105,6 @@ public class UserController {
             // 判断密码是否做了变更
             User originalUser = userService.getUserById(user.getId());
             String rawPassword = originalUser.getPassword();
-
-
             PasswordEncoder encoder = new BCryptPasswordEncoder();
             String encodePasswd = encoder.encode(user.getPassword());
             boolean isMatch = encoder.matches(rawPassword, encodePasswd);

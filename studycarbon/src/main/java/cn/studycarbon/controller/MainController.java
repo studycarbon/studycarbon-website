@@ -1,9 +1,12 @@
 package cn.studycarbon.controller;
 
+import cn.studycarbon.Application;
 import cn.studycarbon.domain.Authority;
 import cn.studycarbon.domain.User;
 import cn.studycarbon.service.AuthorityService;
 import cn.studycarbon.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,8 @@ import java.util.List;
 @Controller
 public class MainController {
 
+    private static Logger logger = LoggerFactory.getLogger(MainController.class);
+
     @Autowired
     private UserService userService;
 
@@ -35,12 +40,15 @@ public class MainController {
     // 返回首页
     @GetMapping("/index")
     public String index() {
+        logger.info("get index.");
         return "index";
     }
 
     // 登录
     @GetMapping("/login")
     public String login() {
+        // 返回登录页面
+        logger.info("get login page.");
         return "login";
     }
 

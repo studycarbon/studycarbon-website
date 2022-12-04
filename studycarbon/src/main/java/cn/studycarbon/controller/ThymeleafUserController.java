@@ -13,17 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/thymeleafUsers")
 public class ThymeleafUserController {
 
-   // @Autowired
-   // private ThymeleafUserDao thymeleafUserDao;
-
     @Autowired
     private ThymeleafUserRepository thymeleafRepo;
 
     // 直接映射 /thymeleafUsers
     @GetMapping
     public ModelAndView list(Model model) {
-        //System.out.println(thymeleafUserDao.listUser());
-        //model.addAttribute("userList", thymeleafUserDao.listUser());
         model.addAttribute("userList", thymeleafRepo.findAll());
         model.addAttribute("title","用户管理");
         return new ModelAndView("thymeleafUser/list","userModel", model);
@@ -32,7 +27,6 @@ public class ThymeleafUserController {
     // /thymeleafUsers/{id}
     @GetMapping("{id}")
     public ModelAndView view(@PathVariable("id") Long id, Model model) {
-        //model.addAttribute("user", thymeleafUserDao.getUserById(id));
         model.addAttribute("user", thymeleafRepo.findById(id).get());
         model.addAttribute("title","查看用户");
         return new ModelAndView("thymeleafUser/view","userModel", model);
@@ -51,21 +45,18 @@ public class ThymeleafUserController {
     // 保存或者更新用户
     @PostMapping
     public ModelAndView saveOrUpdateUser(ThymeleafUser user) {
-       // thymeleafUserDao.saveOrUpdateUser(user);
         thymeleafRepo.save(user);
         return new ModelAndView("redirect:/thymeleafUsers");
     }
 
     @GetMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {
-        //thymeleafUserDao.deleteUser(id);
         thymeleafRepo.deleteById(id);
         return new ModelAndView("redirect:/thymeleafUsers");
     }
 
     @GetMapping("/modify/{id}")
     public ModelAndView modify(@PathVariable("id") Long id, Model model) {
-        //ThymeleafUser user = thymeleafUserDao.getUserById(id);
         ThymeleafUser user = thymeleafRepo.findById(id).get();
         model.addAttribute("user", user);
         model.addAttribute("title","修改用户");

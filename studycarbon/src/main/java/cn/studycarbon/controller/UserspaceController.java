@@ -1,5 +1,6 @@
 package cn.studycarbon.controller;
 
+import cn.studycarbon.Application;
 import cn.studycarbon.domain.Blog;
 import cn.studycarbon.domain.Catalog;
 import cn.studycarbon.domain.User;
@@ -9,6 +10,8 @@ import cn.studycarbon.service.CatalogService;
 import cn.studycarbon.service.UserService;
 import cn.studycarbon.util.ConstraintViolationExceptionHandler;
 import cn.studycarbon.vo.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,6 +36,8 @@ import java.util.List;
 @RequestMapping("/u")
 public class UserspaceController {
 
+    private static Logger logger = LoggerFactory.getLogger(UserspaceController.class);
+
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -48,6 +53,7 @@ public class UserspaceController {
     // 访问个人主页
     @GetMapping("/{username}")
     public String userSpace(@PathVariable("username") String username, Model model) {
+        logger.debug("访问个人主页");
         User user = (User) userDetailsService.loadUserByUsername(username);
         model.addAttribute("user", user);
         return "redirect:/u/"+username+"/blogs";
@@ -55,9 +61,12 @@ public class UserspaceController {
 
     // 访问个人设置
     @GetMapping("/{username}/profile")
-    @PreAuthorize("authentication.name.equals(#username)") //
+    @PreAuthorize("authentication.name.equals(#username)")
     public ModelAndView profile(@PathVariable("username") String username, Model model) {
+        logger.info("get userspace page");
         User user = (User)userDetailsService.loadUserByUsername(username);
+        logger.info("[profile] user:"+user);
+        model.addAttribute("user", user);
         return new ModelAndView("/userspace/profile","userModel",model);
     }
 
@@ -168,7 +177,7 @@ public class UserspaceController {
         List<Vote> votes = blog.getVotes();
         Vote currentVote = null; // 当前用户的点赞情况
 
-        if (principal !=null) {
+        if (principal != null) {
             for (Vote vote : votes) {
                 vote.getUser().getUsername().equals(principal.getUsername());
                 currentVote = vote;

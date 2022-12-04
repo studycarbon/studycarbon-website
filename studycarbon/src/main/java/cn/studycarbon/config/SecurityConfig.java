@@ -1,14 +1,46 @@
 package cn.studycarbon.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private static final String KEY = "studycarbon.cn";
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public SecurityConfig() {
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService);
+//        PasswordEncoder passwordEncoder = getApplicationContext().getBean("PasswordEncoder", PasswordEncoder.class);
+        authenticationProvider.setPasswordEncoder(passwordEncoder);
+        return authenticationProvider;
+    }
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
@@ -25,5 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // auth.inMemoryAuthentication().withUser("mowangshuying").password("123456").roles("ADMIN");
         // 当使用password标识标签时,使用上述创建mowangshuying时，出现There is no PasswordEncoder mapped for id “null”，参考上述文章内容
         auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder()).withUser("mowangshuying").password(new BCryptPasswordEncoder().encode("123456")).roles("ADMIN");
+        auth.userDetailsService(userDetailsService);
+        auth.authenticationProvider(authenticationProvider());
     }
 }

@@ -10,9 +10,8 @@ public class Application {
     // 日志简单使用，后续优化
     private static Logger logger = LoggerFactory.getLogger(Application.class);
     public static void main(String[] args) {
-        logger.info("main start.");
+        logger.debug("===================================main======================================");
         SpringApplication.run(Application.class, args);
-        logger.info("main end.");
     }
 
 }
