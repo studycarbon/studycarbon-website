@@ -77,7 +77,11 @@ $(function() {
 					 success: function(data){
 						 if (data.success) {
 							// 成功后，置换头像图片
-							 $(".blog-avatar").attr("src", data.avatarUrl);
+							 //$(".blog-avatar").attr("src", data.avatarUrl);
+							 $(".blog-avatar").attr("src", data.body);
+							 // console.log("data.avatarUrl："+data.body);
+							 //console.log("data:"+data);
+							 //console.log(data.data);
 						 } else {
 							 toastr.error("error!"+data.message);
 						 }
