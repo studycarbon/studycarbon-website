@@ -53,7 +53,7 @@
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="/" th:href="@{/}">NewStarBlog</a>
+        <a class="navbar-brand" href="/" th:href="@{/}">Carbon 语言中文网</a>
 
         <div class="collapse navbar-collapse" id="navbarsContainer">
 
@@ -85,10 +85,15 @@
 
                     <!--下拉菜单项-->
                     <div class="dropdown-menu" >
-						<a class=" dropdown-item" href="/u/waylau" th:href="@{'/u/' + ${#authentication.name}}">个人主页</a> 
+						<a class="dropdown-item" href="/u/waylau" th:href="@{'/u/' + ${#authentication.name}}">个人主页</a>
 						<a class="dropdown-item" href="/u/waylau/profile" th:href="@{'/u/' + ${#authentication.name}} + '/profile'" >个人设置</a>
 					</div>
 				</div>
+
+                <!--写博客-->
+                <div>
+                    <a href="/u/waylau/blogs/edit" th:href="'/u/' + ${#authentication.name} + '/blogs/edit'" class="btn btn-outline-success my-2 my-sm-0">写博客</a>
+                </div>
 
 				<form action="/logout" th:action="@{/logout}" method="post">
 					<input class="btn btn-outline-success " type="submit" value="退出">

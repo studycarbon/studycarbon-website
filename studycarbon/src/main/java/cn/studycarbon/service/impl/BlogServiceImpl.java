@@ -33,15 +33,16 @@ public class BlogServiceImpl implements BlogService {
 		boolean isNew = (blog.getId() == null);
 		EsBlog esBlog = null;
 		Blog returnBlog = blogRepository.save(blog);
-		
-		if (isNew) {
-			esBlog = new EsBlog(returnBlog);
-		} else {
-			esBlog = esBlogService.getEsBlogByBlogId(blog.getId());
-			esBlog.update(returnBlog);
-		}
-		
-		esBlogService.updateEsBlog(esBlog);
+
+		// 暂时不进行博客搜索相关内容
+		// if (isNew) {
+		//	esBlog = new EsBlog(returnBlog);
+		//} else {
+		//	esBlog = esBlogService.getEsBlogByBlogId(blog.getId());
+		//	esBlog.update(returnBlog);
+		//}
+		//esBlogService.updateEsBlog(esBlog);
+
 		return returnBlog;
 	}
 

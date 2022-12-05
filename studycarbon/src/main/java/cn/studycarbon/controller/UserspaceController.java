@@ -120,6 +120,7 @@ public class UserspaceController {
                                    @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
                                    Model model) {
 
+        logger.info("get personal blogs");
         User  user = (User)userDetailsService.loadUserByUsername(username);
         Page<Blog> page = null;
         if (catalogId != null && catalogId > 0) { // 分类查询
@@ -155,12 +156,11 @@ public class UserspaceController {
      */
     @GetMapping("/{username}/blogs/{id}")
     public String getBlogById(@PathVariable("username") String username,@PathVariable("id") Long id, Model model) {
+        logger.info("get blog username:"+username+" blog id:"+id);
         User principal = null;
         Blog blog = blogService.getBlogById(id);
-
         // 每次读取，简单的可以认为阅读量增加1次
         blogService.readingIncrease(id);
-
         // 判断操作用户是否是博客的所有者
         boolean isBlogOwner = false;
         if (SecurityContextHolder.getContext().getAuthentication() !=null && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
@@ -171,10 +171,11 @@ public class UserspaceController {
             }
         }
 
+        logger.info("get blog isBlogOwner:"+isBlogOwner);
+
         // 判断操作用户的点赞情况
         List<Vote> votes = blog.getVotes();
         Vote currentVote = null; // 当前用户的点赞情况
-
         if (principal != null) {
             for (Vote vote : votes) {
                 vote.getUser().getUsername().equals(principal.getUsername());
@@ -209,9 +210,9 @@ public class UserspaceController {
      // 获取新增博客的界面
     @GetMapping("/{username}/blogs/edit")
     public ModelAndView createBlog(@PathVariable("username") String username, Model model) {
+        logger.info("get new blog edit page.");
         User user = (User)userDetailsService.loadUserByUsername(username);
         List<Catalog> catalogs = catalogService.listCatalogs(user);
-
         model.addAttribute("blog", new Blog(null, null, null));
         model.addAttribute("catalogs", catalogs);
         return new ModelAndView("/userspace/blogedit", "blogModel", model);
@@ -220,10 +221,10 @@ public class UserspaceController {
     // 获取编辑博客的界面
     @GetMapping("/{username}/blogs/edit/{id}")
     public ModelAndView editBlog(@PathVariable("username") String username, @PathVariable("id") Long id, Model model) {
+        logger.info("get update blog edit page.");
         // 获取用户分类列表
         User user = (User)userDetailsService.loadUserByUsername(username);
         List<Catalog> catalogs = catalogService.listCatalogs(user);
-
         model.addAttribute("blog", blogService.getBlogById(id));
         model.addAttribute("catalogs", catalogs);
         return new ModelAndView("/userspace/blogedit", "blogModel", model);
@@ -233,14 +234,17 @@ public class UserspaceController {
     @PostMapping("/{username}/blogs/edit")
     @PreAuthorize("authentication.name.equals(#username)")
     public ResponseEntity<Response> saveBlog(@PathVariable("username") String username, @RequestBody Blog blog) {
+        logger.info("save blog");
         // 对 Catalog 进行空处理
         if (blog.getCatalog().getId() == null) {
+            logger.info("catalog id is null");
             return ResponseEntity.ok().body(new Response(false,"未选择分类"));
         }
 
         try {
             // 判断是修改还是新增
             if (blog.getId()!=null) {
+                logger.info("blog id is not null, update blog.");
                 Blog orignalBlog = blogService.getBlogById(blog.getId());
                 orignalBlog.setTitle(blog.getTitle());
                 orignalBlog.setContent(blog.getContent());
@@ -249,6 +253,7 @@ public class UserspaceController {
                 orignalBlog.setTags(blog.getTags());
                 blogService.saveBlog(orignalBlog);
             } else {
+                logger.info("blog id is null, create blog.");
                 User user = (User)userDetailsService.loadUserByUsername(username);
                 blog.setUser(user);
                 blogService.saveBlog(blog);
