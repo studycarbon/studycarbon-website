@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.ConstraintViolationException;
 
+import cn.studycarbon.Application;
 import cn.studycarbon.domain.Blog;
 import cn.studycarbon.domain.Comment;
 import cn.studycarbon.domain.User;
@@ -11,6 +12,8 @@ import cn.studycarbon.service.BlogService;
 import cn.studycarbon.service.CommentService;
 import cn.studycarbon.util.ConstraintViolationExceptionHandler;
 import cn.studycarbon.vo.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,7 +37,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/comments")
 public class CommentController {
-	
+
+	private static Logger logger = LoggerFactory.getLogger(Application.class);
+
 	@Autowired
 	private BlogService blogService;
 	
@@ -66,6 +71,7 @@ public class CommentController {
 		model.addAttribute("comments", comments);
 		return "/userspace/blog :: #mainContainerRepleace";
 	}
+
 	/**
 	 * 发表评论
 	 * @param blogId
@@ -75,7 +81,7 @@ public class CommentController {
 	@PostMapping
 	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER')")  // 指定角色权限才能操作方法
 	public ResponseEntity<Response> createComment(Long blogId, String commentContent) {
- 
+		logger.info("create comment blogId:"+blogId+" commentContent:"+commentContent);
 		try {
 			blogService.createComment(blogId, commentContent);
 		} catch (ConstraintViolationException e)  {
@@ -101,10 +107,12 @@ public class CommentController {
 		// 判断操作用户是否是评论的所有者
 		if (SecurityContextHolder.getContext().getAuthentication() !=null && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
 				 &&  !SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser")) {
-			User principal = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+
+			User principal = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if (principal !=null && user.getUsername().equals(principal.getUsername())) {
 				isOwner = true;
-			} 
+			}
+
 		} 
 		
 		if (!isOwner) {
