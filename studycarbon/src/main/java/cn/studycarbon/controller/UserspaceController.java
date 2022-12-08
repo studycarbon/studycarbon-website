@@ -178,9 +178,10 @@ public class UserspaceController {
         Vote currentVote = null; // 当前用户的点赞情况
         if (principal != null) {
             for (Vote vote : votes) {
-                vote.getUser().getUsername().equals(principal.getUsername());
-                currentVote = vote;
-                break;
+                if (vote.getUser().getUsername().equals(principal.getUsername())) {
+                    currentVote = vote;
+                    break;
+                }
             }
         }
 

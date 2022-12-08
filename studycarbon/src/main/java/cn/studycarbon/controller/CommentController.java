@@ -112,7 +112,6 @@ public class CommentController {
 			if (principal !=null && user.getUsername().equals(principal.getUsername())) {
 				isOwner = true;
 			}
-
 		} 
 		
 		if (!isOwner) {

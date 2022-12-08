@@ -30,10 +30,9 @@ public class BlogServiceImpl implements BlogService {
 	@Override
 	public Blog saveBlog(Blog blog) {
 		// 判断是否是新创建的博客
-		boolean isNew = (blog.getId() == null);
-		EsBlog esBlog = null;
+		//boolean isNew = (blog.getId() == null);
+		//EsBlog esBlog = null;
 		Blog returnBlog = blogRepository.save(blog);
-
 		// 暂时不进行博客搜索相关内容
 		// if (isNew) {
 		//	esBlog = new EsBlog(returnBlog);
@@ -42,7 +41,6 @@ public class BlogServiceImpl implements BlogService {
 		//	esBlog.update(returnBlog);
 		//}
 		//esBlogService.updateEsBlog(esBlog);
-
 		return returnBlog;
 	}
 
@@ -108,7 +106,7 @@ public class BlogServiceImpl implements BlogService {
 
 	@Override
 	public void removeComment(Long blogId, Long commentId) {
-		Blog originalBlog = blogRepository.findById(commentId).get();
+		Blog originalBlog = blogRepository.findById(blogId).get();
 		originalBlog.removeComment(commentId);
 		this.saveBlog(originalBlog);
 	}

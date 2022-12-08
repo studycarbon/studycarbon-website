@@ -6,24 +6,20 @@
 </head>
 <body>
 <style type="text/css">
- 
     @import "/css/emoji/nature.css";
     @import "/css/emoji/object.css";
     @import "/css/emoji/people.css";
     @import "/css/emoji/place.css";
     @import "/css/emoji/Sysmbols.css";
     @import "/css/emoji/twemoji.css";
- 
 </style>
-<!-- Page Content -->
+
+<!--页面主体内容-->
 <div class="container blog-content-container">
-
+    <!--左右布局-->
     <div class="row">
-
-        <!-- Blog Entries Column -->
+        <!--占用8个位置-->
         <div class="col-md-8">
-
-            <!-- Blog Post -->
             <div class="card mb-4">
                 <div class="card-block" th:object="${blogModel.blog}">
                     <input type="hidden" name="id" th:value="*{id}" id="blogId">
@@ -33,14 +29,10 @@
                     <textarea id="md" data-provide="markdown" data-hidden-buttons="cmdImage" name="content" th:text="*{content}" style="margin-top: 20px"></textarea>
                     <hr>
                 </div>
-
             </div>
-
         </div>
-
         <!-- 右侧栏目 -->
         <div class="col-md-4">
- 
                 <!-- 文章目录 -->
                 <div class="card ">
                     <h5 class="card-header"><i class="fa fa-file-image-o" aria-hidden="true"></i> 图片上传</h5>
@@ -57,10 +49,10 @@
 			                 </div>
                         </div>
                     </div>
-
                 </div>
+
  				<!-- 图片上传 -->
-                <div class="card ">
+                <div class="card " style="margin-top: 20px;">
                     <h5 class="card-header"><i class="fa fa-cog" aria-hidden="true"></i> 博客设置</h5>
                     <div class="card-block">
                         <div class="row mt-1">
@@ -90,18 +82,12 @@
 
                 </div>
         </div>
-
     </div>
-    <!-- /.row -->
-
 </div>
-<!-- /.container -->
 
 
 <div th:replace="~{fragments/footer :: footer}">...</div>
- 
-
 <script src="../../js/userspace/blogedit.js" th:src="@{/js/userspace/blogedit.js}"></script>
- 
+
 </body>
 </html>

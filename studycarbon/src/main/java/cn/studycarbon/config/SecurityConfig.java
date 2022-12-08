@@ -13,8 +13,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+// 处理@PreAuthorize 不起作用 参考：https://blog.csdn.net/weixin_41195786/article/details/84439384
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled=true)  // 处理@PreAuthorize 不起作用 参考：https://blog.csdn.net/weixin_41195786/article/details/84439384
+@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String KEY = "studycarbon.cn";
@@ -37,7 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
-//        PasswordEncoder passwordEncoder = getApplicationContext().getBean("PasswordEncoder", PasswordEncoder.class);
         authenticationProvider.setPasswordEncoder(passwordEncoder);
         return authenticationProvider;
     }

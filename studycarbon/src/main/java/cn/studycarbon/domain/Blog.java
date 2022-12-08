@@ -85,6 +85,7 @@ public class Blog implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "comment_id", referencedColumnName = "id"))
     private List<Comment> comments;
 
+    // 一个blog有很多个点赞
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "blog_vote", joinColumns = @JoinColumn(name = "blog_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "vote_id", referencedColumnName = "id"))
@@ -225,6 +226,7 @@ public class Blog implements Serializable {
         return isExist;
     }
 
+
      //
      // 取消点赞
      // @param voteId
@@ -232,12 +234,12 @@ public class Blog implements Serializable {
     public void removeVote(Long voteId) {
         for (int index=0; index < this.votes.size(); index ++ ) {
             if (this.votes.get(index).getId() == voteId) {
+                // 取消点赞，同时更新点赞列表信息
                 this.votes.remove(index);
+                this.voteSize = this.votes.size();
                 break;
             }
         }
-
-        this.voteSize = this.votes.size();
     }
 
     public List<Vote> getVotes() {
