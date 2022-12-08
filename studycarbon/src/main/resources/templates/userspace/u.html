@@ -17,9 +17,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <span>
-                      <a href="/u/waylau" title="waylau" >
-                        <img src="https://waylau.com/images/waylau_181_181.jpg" class="blog-avatar-230"
-                             alt="waylau">
+                      <a href="/u/waylau" th:href="'/u/' + ${user.username}" title="waylau" th:title="${user.username}" >
+                        <img th:src="${user.avatar} == null ? '/images/avatar-defualt.jpg' : ${user.avatar} " class="blog-avatar-230">
                       </a>
                     </span>
                 </div>
@@ -28,48 +27,47 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h5 class="card-text">老卫</h5>
+                    <h2 class="card-text" th:text="${user.name}">老卫</h2>
+                    <h4 class="card-text" th:text="${user.username}">waylau</h4>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <h4 class="card-text">waylau</h4>
-                </div>
-            </div>
             <!--分割线-->
             <hr/>
 
             <!--用户邮箱-->
             <div class="row ">
                 <div class="col-md-12">
-                    <h5><i class="fa fa-envelope-o" aria-hidden="true"></i>
-                        <a href="mailto:waylau521@gmail.com">waylau521@gmail.com</a></h5>
+                    <h5>
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        <a href="mailto:waylau521@gmail.com" th:href="'mailto:'+ ${user.email}" th:text="${user.email}">waylau521@gmail.com</a></h5>
+                    </h5>
                 </div>
             </div>
  
-	      <!-- 分类 -->
-	        <div class="card my-4">
-	            <h5 class="card-header"><i class="fa fa-bars" aria-hidden="true"></i> 分类</h5>
-	            <ul class="list-group">
-	                <a href="/u/waylau/blogs?category=11" class="list-group-item" title="waylau">
-	                    Spring Data<span class="badge badge-default badge-pill">11115</span>
-	                </a>
-	                <a href="/u/waylau/blogs?category=11" class="list-group-item" title="waylau">
-	                    	分布式系统<span class="badge badge-default badge-pill">338</span>
-	                </a>
-	                <a href="/u/waylau/blogs?category=11" class="list-group-item" title="waylau">
-	                   	Java<span class="badge badge-default badge-pill">289</span>
-	                </a>
-	                <a href="/u/waylau/blogs?category=11" class="list-group-item" title="waylau">
-	                   Eclipse<span class="badge badge-default badge-pill">189</span>
-	                </a>
-	
-	                <a href="/u/waylau/blogs?category=11" class="list-group-item" title="waylau">
-	                     Plugin<span class="badge badge-default badge-pill">189</span>
-	                </a>
-	            </ul>
-	        </div>
+	         <!-- 分类 -->
+            <div id="catalogMain">
+                <div class="card my-4" id="catalogRepleace">
+                    <h5 class="card-header"><i class="fa fa-bars" aria-hidden="true"></i> 分类</h5>
+                    <ul class="list-group" th:each="catalog : ${catalogs}" th:object="${catalog}">
+                        <div class="blog-list-group-item">
+                            <a href="javascript:void(0)" th:attr="catalogId=*{id}" class="blog-query-by-catalog">
+                                [[*{name}]]
+                            </a>
+                            <span class="blog-right">
+                                <a href="javascript:void(0)" th:if="${isCatalogsOwner}" class="blog-edit-catalog"
+                                   data-toggle="modal" data-target="#flipFlop" role="button" th:attr="catalogId=*{id}">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+	                		    <a href="javascript:void(0)" th:if="${isCatalogsOwner}" class="blog-delete-catalog" th:attr="catalogId=*{id}">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </a>
+	            		    </span>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
         </div>
         
    
@@ -199,5 +197,13 @@
 
 
 <div th:replace="~{fragments/footer :: footer}">...</div>
+
+<!-- JavaScript -->
+<script th:inline="javascript">
+    var username = [[${user.username}]];
+    var catalogId = [[${catalogId}]];
+</script>
+<script src="../../js/userspace/u.js" th:src="@{/js/userspace/u.js}"></script>
+
 </body>
 </html>

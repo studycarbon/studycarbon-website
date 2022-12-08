@@ -130,6 +130,7 @@
 
     <!-- JavaScript -->
     <script th:inline="javascript">
+        // 定义blogId用于全局使用
         // https://www.cnblogs.com/suncj/p/4031486.html
         var blogId = [[${blogModel.id}]];
         var blogUrl = '/u/' + [[${blogModel.user.username}]] + '/blogs/'+ [[${blogModel.id}]] ;
