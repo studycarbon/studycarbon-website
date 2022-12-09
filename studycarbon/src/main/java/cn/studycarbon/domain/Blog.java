@@ -96,7 +96,7 @@ public class Blog implements Serializable {
     private Catalog catalog;
 
     @Column(name="tags", length = 100)
-    private String tags;  // 标签
+    private String tags;  // 标签 "a,b,c"
 
     protected Blog() {
         // TODO Auto-generated constructor stub
