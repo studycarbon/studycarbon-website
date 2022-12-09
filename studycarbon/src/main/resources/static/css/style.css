@@ -10,5 +10,9 @@
 }
 
 .hidden { 
-	display: none !important; 
+	display: none !important;
+}
+
+body {
+    background-color: #e2e2e2;
 }

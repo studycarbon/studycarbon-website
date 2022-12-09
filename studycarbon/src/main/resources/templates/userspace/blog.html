@@ -14,8 +14,8 @@
             <div class="col-md-8">
 
                 <!-- Blog Post -->
-                <div class="card mb-4">
-                    <div class="card-block">
+                <div class="card mb-4" style="background-color: #e2e2e2">
+                    <div class="card-block" style="background-color: white">
                         <!--标题：包含头像及文章标题-->
                         <h2 class="card-title">
                             <!--显示头像等-->
@@ -52,7 +52,7 @@
                     </div>
 
                     <!--分类与标签-->
-                    <div class="card-block">
+                    <div class="card-block" style="background-color: white">
                         <h5>分类：
                             <a th:href="'/u/'+${blogModel.user.username} + '/blogs?catalog='+${blogModel.catalog.id} " th:text="${blogModel.catalog.name}">
                                 博客所属分类
@@ -66,25 +66,13 @@
                         </h5>
                     </div>
 
-                    <!--评论编辑-->
-                    <div class="card-block">
-                        <h5>评论：</h5>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <textarea class="blog-textarea" placeholder="看帖需留言~" id="commentContent"></textarea>
-                            </div>
-                        </div>
-                        <!--发表评论-->
-                        <button class="btn btn-primary float-right" id="submitComment">发表评论</button>
-                        <!--点赞与取消点赞-->
-                        <button class="btn btn-primary float-right" th:if="${currentVote} == null" id="submitVote">点赞</button>
-                        <button class="btn btn-primary float-right" th:if="${currentVote} != null" th:attr="voteId=${currentVote.id}" id="cancelVote">取消点赞</button>
-                    </div>
+                    <!--<div style="margin-top: 20px">-->
 
                     <!--评论展示-->
-                    <div class="card-block" id="mainContainer">
+                    <div class="card-block" id="mainContainer" style="margin-top: 20px;background-color: white">
                         <div class="row" id="mainContainerRepleace" th:each="comment,commentStat : ${comments}" th:object="${comment}">
                             <h2 class="card-title col-lg-1 col-md-2">
+                            <!--头像及用户名等信息-->
 							<span>
 			                  <a href="/u/waylau" th:href="'/u/'+ *{user.username}" title="waylau" th:title="*{user.username}">
 			                    <img src="/images/avatar-defualt.jpg" th:src="*{user.avatar} == null ? '/images/avatar-defualt.jpg' : *{user.avatar}" class="blog-avatar-50">
@@ -96,7 +84,23 @@
                                 <a href="javascript:void(0)" class="blog-delete-comment" th:if="${commentOwner} eq *{user.username}" th:attr="commentId=*{id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 <p th:text="*{content}">默认评论内容</p>
                             </div>
+                            <hr style="height:2px;/*border-width:0px;*/color:black;blackground-color:gray;width: 100%" />
                         </div>
+                    </div>
+
+                    <!--评论编辑-->
+                    <div class="card-block"  style="margin-top: 20px;background-color: white">
+                        <h5>评论：</h5>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <textarea class="blog-textarea" placeholder="看帖需留言~" id="commentContent"></textarea>
+                            </div>
+                        </div>
+                        <!--发表评论-->
+                        <button class="btn btn-primary float-right" id="submitComment">发表评论</button>
+                        <!--点赞与取消点赞-->
+                        <button class="btn btn-primary float-right" th:if="${currentVote} == null" id="submitVote">点赞</button>
+                        <button class="btn btn-primary float-right" th:if="${currentVote} != null" th:attr="voteId=${currentVote.id}" id="cancelVote">取消点赞</button>
                     </div>
 
                 </div>
@@ -115,7 +119,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
