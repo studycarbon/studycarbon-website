@@ -13,11 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-// Blog 服务.
-//
-// @since 1.0.0 2017年4月7日
-// @author <a href="https://waylau.com">Way Lau</a>
-//
+
 @Service
 public class BlogServiceImpl implements BlogService {
 
@@ -44,9 +40,6 @@ public class BlogServiceImpl implements BlogService {
 		return returnBlog;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.waylau.spring.boot.blog.service.BlogService#removeBlog(java.lang.Long)
-	 */
 	@Transactional
 	@Override
 	public void removeBlog(Long id) {
@@ -55,12 +48,8 @@ public class BlogServiceImpl implements BlogService {
 		esBlogService.removeEsBlog(esblog.getId());
 	}
 
-	/* (non-Javadoc)
-	 * @see com.waylau.spring.boot.blog.service.BlogService#getBlogById(java.lang.Long)
-	 */
 	@Override
 	public Blog getBlogById(Long id) {
-		// return blogRepository.findOne(id);
 		return  blogRepository.findById(id).get();
 	}
 
@@ -68,7 +57,6 @@ public class BlogServiceImpl implements BlogService {
 	public Page<Blog> listBlogsByTitleVote(User user, String title, Pageable pageable) {
 		// 模糊查询
 		title = "%" + title + "%";
-		//Page<Blog> blogs = blogRepository.findByUserAndTitleLikeOrderByCreateTimeDesc(user, title, pageable);
 		String tags = title;
 		Page<Blog> blogs = blogRepository.findByTitleLikeAndUserOrTagsLikeAndUserOrderByCreateTimeDesc(title,user, tags,user, pageable);
 		return blogs;
