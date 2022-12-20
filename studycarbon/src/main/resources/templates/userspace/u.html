@@ -11,7 +11,7 @@
     <div class="row">
 
         <!-- 左侧栏目 -->
-        <div class="col-md-4 col-xl-3" style="background-color: white;height: 650px;">
+        <div class="col-md-4 col-xl-3" style="background-color: white;height: 750px;">
             <!--头像区域-->
             <div class="row" style="margin-top: 20px;">
                 <div class="col-md-12">
@@ -26,8 +26,8 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h5 class="card-text" th:text="${user.name}">老卫</h5>
-                    <h5 class="card-text" th:text="${user.username}">waylau</h5>
+                    <i class="card-text" th:text="${user.name}" style="font-style:normal;">老卫</i>
+                    <i class="card-text" th:text="${user.username}" style="font-style:normal;">waylau</i>
                 </div>
             </div>
 
@@ -37,12 +37,12 @@
             <!--用户邮箱-->
             <div class="row ">
                 <div class="col-md-12">
-                    <h5>
                         <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                        <a href="mailto:waylau521@gmail.com" th:href="'mailto:'+ ${user.email}" th:text="${user.email}">waylau521@gmail.com</a></h5>
-                    </h5>
+                        <a href="mailto:waylau521@gmail.com" th:href="'mailto:'+ ${user.email}" th:text="${user.email}">waylau521@gmail.com</a>
                 </div>
             </div>
+
+            <hr/>
  
 	         <!-- 分类 -->
             <div id="catalogMain">
