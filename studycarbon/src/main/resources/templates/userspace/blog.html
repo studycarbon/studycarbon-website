@@ -26,9 +26,7 @@
 					        </span>
 
                             <!--博客标题-->
-                            <a href="/u/waylau/blogs/1" class="card-link" title="waylau"
-                               th:href="'/u/' + ${blogModel.user.username} + '/blogs/'+ ${blogModel.id}"
-                               th:title="${blogModel.user.username}" th:text="${blogModel.title}">
+                            <a href="/u/waylau/blogs/1" class="card-link" title="waylau" th:href="'/u/' + ${blogModel.user.username} + '/blogs/'+ ${blogModel.id}" th:title="${blogModel.user.username}" th:text="${blogModel.title}">
                                 博客标题
                             </a>
                         </h2>
