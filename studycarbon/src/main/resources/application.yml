@@ -19,7 +19,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver # 驱动项配置
 
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       # ddl-auto: create-drop # 参考https://www.cnblogs.com/qingmuchuanqi48/p/11616145.html
       ddl-auto: update

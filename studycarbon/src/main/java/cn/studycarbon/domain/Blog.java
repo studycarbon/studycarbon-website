@@ -204,7 +204,7 @@ public class Blog implements Serializable {
     }
 
     //
-    //点赞
+    // 点赞
     // @param vote
     // @return
     //
@@ -267,4 +267,8 @@ public class Blog implements Serializable {
         this.catalog = catalog;
     }
 
+    @Override
+    public String toString() {
+        return "Blog{" + "id=" + id + ", title='" + title + '\'' + '}';
+    }
 }

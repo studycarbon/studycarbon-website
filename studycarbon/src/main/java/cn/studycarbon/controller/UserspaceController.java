@@ -52,7 +52,7 @@ public class UserspaceController {
     // 访问个人主页
     @GetMapping("/{username}")
     public String userSpace(@PathVariable("username") String username, Model model) {
-        logger.debug("访问个人主页");
+        logger.debug("get person blog page => ");
         User user = (User) userDetailsService.loadUserByUsername(username);
         model.addAttribute("user", user);
         return "redirect:/u/"+username+"/blogs";
@@ -90,6 +90,7 @@ public class UserspaceController {
         return "redirect:/u/" + username + "/profile";
     }
 
+    // 访问用户头像
     @GetMapping("/{username}/avatar")
     @PreAuthorize("authentication.name.equals(#username)")
     public ModelAndView avatar(@PathVariable("username") String username, Model model) {
@@ -98,7 +99,7 @@ public class UserspaceController {
         return new ModelAndView("/userspace/avatar", "userModel", model);
     }
 
-
+    // 修改用户头像
     @PostMapping("/{username}/avatar")
     @PreAuthorize("authentication.name.equals(#username)")
     public ResponseEntity<Response> saveAvatar(@PathVariable("username") String username, @RequestBody User user) {
@@ -120,7 +121,9 @@ public class UserspaceController {
                                    @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
                                    Model model) {
 
-        logger.info("get personal blogs");
+        logger.info("get personal blogs => pesonal name:{}, order:{}, catalogId:{}, keyword:{}, pageIndex:{}, pageSize{}",
+                username, order, catalogId, keyword, pageIndex, pageSize);
+
         User  user = (User)userDetailsService.loadUserByUsername(username);
         Page<Blog> page = null;
         if (catalogId != null && catalogId > 0) { // 分类查询
@@ -136,6 +139,13 @@ public class UserspaceController {
             Pageable pageable = PageRequest.of(pageIndex, pageSize);
             page = blogService.listBlogsByTitleVote(user, keyword, pageable);
         }
+
+        //logger.info("get personal blogs list:" + page.getContent());
+        List<Blog> logBlogLists = page.getContent();
+        for (Blog logBlog : logBlogLists) {
+            logger.info("get personal blog:" + logBlog);
+        }
+
 
         // 当前所在页面数据列表
         List<Blog> list = page.getContent();
