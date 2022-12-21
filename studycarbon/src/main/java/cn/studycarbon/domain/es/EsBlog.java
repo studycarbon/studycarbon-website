@@ -7,6 +7,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 //import org.springframework.data.elasticsearch.annotations.FieldIndex; // es2.2
 
 import javax.persistence.Id;
+import javax.persistence.Index;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -23,44 +24,47 @@ public class EsBlog implements Serializable {
     // private static final long serialVersionUID = 1L;
 
     @Id
+    @Field(type = FieldType.Keyword)
     private String id;
 
-    //@Field(index = FieldIndex.not_analyzed)
-    @Field(type=FieldType.Keyword)
+    // 不做全文检索字段
+    @Field(type = FieldType.Long)
     private Long blogId;
 
-
+    @Field(type = FieldType.Text, analyzer = "ik_smart")
     private String title;
-    private String summary;
-    private String content;
 
-    //@Field(index = FieldIndex.not_anlyzed)
-    @Field(type=FieldType.Keyword)
-    private String username;
+    @Field(type = FieldType.Text, analyzer = "ik_smart")
+    private String summary;
+
+    @Field(type = FieldType.Text, analyzer = "ik_smart")
+    private String content;
 
     // 不做全文检索字段
     @Field(type = FieldType.Keyword)
-    //@Field(index = false)
+    private String username;
+
+    // 不做全文检索字段
+    @Field(type = FieldType.Keyword, index = false)
     private String avatar;
 
-    @Field(type = FieldType.Keyword)
+    // 不做全文检索字段
+    @Field(type = FieldType.Date, index = false)
     private Timestamp createTime;
 
     // 不做全文检索字段  // 访问量、阅读量
-    //@Field(index = FieldIndex.not_analyzed)
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Integer)
     private Integer readSize = 0;
 
     // 不做全文检索字段 // 评论量
-    //@Field(index = FieldIndex.not_analyzed)
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Integer)
     private Integer commentSize = 0;
 
-    //不做全文检索字段 // 点赞量
-    //@Field(index = FieldIndex.not_analyzed)
-    @Field(type = FieldType.Keyword)
+    //不做全文检索字段 //点赞量
+    @Field(type = FieldType.Integer)
     private Integer voteSize = 0;
 
+    @Field(type = FieldType.Text)
     private String tags;  // 标签
 
     // jpa规范要求，设置为protected,这里设置为public

@@ -7,10 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Application {
+
     // 日志简单使用，后续优化
     private static Logger logger = LoggerFactory.getLogger(Application.class);
     public static void main(String[] args) {
-        logger.debug("===================================main======================================");
+        logger.info("main start...");
         SpringApplication.run(Application.class, args);
     }
 

@@ -45,11 +45,11 @@ public class EsBlogServiceImpl implements EsBlogService {
 	//参考：https://blog.csdn.net/ghdqfhw/article/details/113687869
 	//@Autowired
 	//private ElasticsearchTemplate elasticsearchTemplate;
-	@Autowired
-	private ElasticsearchRestTemplate elasticsearchRestTemplate;
+	//@Autowired
+	//private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
-	@Autowired
-	private UserService userService;
+	//@Autowired
+	//private UserService userService;
 	
 	private static final Pageable TOP_5_PAGEABLE = PageRequest.of(0, 5);
 	private static final String EMPTY_KEYWORD = "";
