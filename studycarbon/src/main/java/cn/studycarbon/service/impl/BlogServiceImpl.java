@@ -44,8 +44,8 @@ public class BlogServiceImpl implements BlogService {
 	@Override
 	public void removeBlog(Long id) {
 		blogRepository.deleteById(id);
-		EsBlog esblog = esBlogService.getEsBlogByBlogId(id);
-		esBlogService.removeEsBlog(esblog.getId());
+		// EsBlog esblog = esBlogService.getEsBlogByBlogId(id);
+		// esBlogService.removeEsBlog(esblog.getId());
 	}
 
 	@Override

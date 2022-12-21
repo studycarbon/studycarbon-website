@@ -12,6 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
@@ -47,6 +50,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         name = "%"+name+"%";
         Page<User> users = userRepository.findByNameLike(name, pageable);
         return users;
+    }
+
+    @Override
+    public List<User> listUsersByUsernames(Collection<String> usernameList) {
+        return null;
     }
 
     // UserDetailService
