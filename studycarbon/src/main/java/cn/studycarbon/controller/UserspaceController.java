@@ -246,6 +246,15 @@ public class UserspaceController {
     @PreAuthorize("authentication.name.equals(#username)")
     public ResponseEntity<Response> saveBlog(@PathVariable("username") String username, @RequestBody Blog blog) {
         logger.info("save blog");
+
+        // 测试代码
+//        List<Blog> blogs = blogService.getAllBlogs();
+//        for (Blog blog1 : blogs) {
+//            blogService.saveBlog(blog1);
+//        }
+        // 测试代码结束
+
+
         // 对 Catalog 进行空处理
         if (blog.getCatalog().getId() == null) {
             logger.info("catalog id is null");

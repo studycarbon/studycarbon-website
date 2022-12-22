@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -51,6 +53,11 @@ public class BlogServiceImpl implements BlogService {
 	@Override
 	public Blog getBlogById(Long id) {
 		return  blogRepository.findById(id).get();
+	}
+
+	@Override
+	public List<Blog> getAllBlogs() {
+		return blogRepository.findAll();
 	}
 
 	@Override

@@ -6,6 +6,8 @@ import cn.studycarbon.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 // Blog 服务接口.
 // @since 1.0.0 2017年4月7日
 // @author <a href="https://waylau.com">Way Lau</a>
@@ -19,6 +21,9 @@ public interface BlogService {
 	
 	// 根据id获取Blog
 	Blog getBlogById(Long id);
+
+	// 获取所有的博客内容
+	List<Blog> getAllBlogs();
 	
 	// 根据用户名进行分页模糊查询（最新）
 	Page<Blog> listBlogsByTitleVote(User user, String title, Pageable pageable);

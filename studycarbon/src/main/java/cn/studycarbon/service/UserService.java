@@ -19,6 +19,8 @@ public interface UserService {
 
     User getUserById(Long id);
 
+    User getUserByUsername(String username);
+
     Page<User> listUsersByNameLike(String name, Pageable pageable);
 
     List<User> listUsersByUsernames(Collection<String> usernameList);

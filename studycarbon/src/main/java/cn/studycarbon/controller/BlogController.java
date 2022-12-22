@@ -5,6 +5,7 @@ import java.util.List;
 import cn.studycarbon.domain.User;
 import cn.studycarbon.domain.es.EsBlog;
 import cn.studycarbon.service.EsBlogService;
+import cn.studycarbon.service.UserService;
 import cn.studycarbon.vo.TagVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,9 @@ public class BlogController {
 
 	@Autowired
     private EsBlogService esBlogService;
+
+	@Autowired
+	UserService userService;
 
 	// 列出所有博客数据
 	@GetMapping
@@ -65,7 +69,12 @@ public class BlogController {
 		}  
  
 		list = page.getContent();	// 当前所在页面数据列表
- 
+
+		// 更新用户头像等
+		for(EsBlog esBlog : list) {
+			String avatar = userService.getUserByUsername(esBlog.getUsername()).getAvatar();
+			esBlog.setAvatar(avatar);
+		}
 
 		model.addAttribute("order", order);
 		model.addAttribute("keyword", keyword);
