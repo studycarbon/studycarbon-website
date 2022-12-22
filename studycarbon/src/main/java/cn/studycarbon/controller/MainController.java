@@ -1,6 +1,5 @@
 package cn.studycarbon.controller;
 
-import cn.studycarbon.Application;
 import cn.studycarbon.domain.Authority;
 import cn.studycarbon.domain.User;
 import cn.studycarbon.service.AuthorityService;
@@ -19,6 +18,7 @@ import java.util.List;
 // IntelliJ IDEA小技巧 —— 代码太乱？一键快速格式化代码
 // https://blog.csdn.net/xue_xiaofei/article/details/106445967
 // 使用“Control + A”全选代码，再使用“Control + Alt + L”，将代码格式规范化
+
 // 主页控制器
 @Controller
 public class MainController {
@@ -41,7 +41,7 @@ public class MainController {
     @GetMapping("/index")
     public String index() {
         logger.info("get index.");
-        return "redirect:/blogs";
+        return "forward:/blogs";
     }
 
     // 登录
