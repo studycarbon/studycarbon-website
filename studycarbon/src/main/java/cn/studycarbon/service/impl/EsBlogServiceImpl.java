@@ -88,17 +88,13 @@ public class EsBlogServiceImpl implements EsBlogService {
         return pages;
     }
 
-    /* (non-Javadoc)
-     * @see com.waylau.spring.boot.blog.service.EsBlogService#listHotestEsBlogs(java.lang.String, org.springframework.data.domain.Pageable)
-     */
+    // 查询最热的博客，最热博客根据阅读量，评论，点赞量，创建时间，进行排序
     @Override
     public Page<EsBlog> listHotestEsBlogs(String keyword, Pageable pageable) throws SearchParseException {
-
         Sort sort = Sort.by(Direction.DESC, "readSize", "commentSize", "voteSize", "createTime");
         if (pageable.getSort() == null) {
             pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
         }
-
         return esBlogRepository.findDistinctEsBlogByTitleContainingOrSummaryContainingOrContentContainingOrTagsContaining(keyword, keyword, keyword, keyword, pageable);
     }
 
@@ -107,13 +103,7 @@ public class EsBlogServiceImpl implements EsBlogService {
         return esBlogRepository.findAll(pageable);
     }
 
-
-    /**
-     * 最新前5
-     *
-     * @param keyword
-     * @return
-     */
+    // 获取到最新的5篇文章
     @Override
     public List<EsBlog> listTop5NewestEsBlogs() {
         Page<EsBlog> page = this.listHotestEsBlogs(EMPTY_KEYWORD, TOP_5_PAGEABLE);

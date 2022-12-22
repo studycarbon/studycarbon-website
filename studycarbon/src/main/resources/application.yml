@@ -27,8 +27,8 @@ spring:
   # https://blog.csdn.net/ghdqfhw/article/details/113687869
   # 采用配置，发现配置还是被丢弃，使用推荐的一些配置
   elasticsearch:
-    username: # 用户名
-    password: # 密码
+    username: elastic # 用户名
+    password: 123456 # 密码
     connection-timeout: 1s  # 连接超时时间
     socket-timeout: 30s #
     uris: ${ES_HOST:localhost}:${ES_PORT:9200} # 端口位置

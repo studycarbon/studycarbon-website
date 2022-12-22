@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -29,7 +30,7 @@ public class Comment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
     private Long id; // 用户的唯一标识
 
-    @NotEmpty(message = "评论内容不能为空")
+    @NotBlank(message = "评论内容不能为空")
     @Size(min = 2, max = 500)
     @Column(nullable = false) // 映射为字段，值不能为空
     private String content;

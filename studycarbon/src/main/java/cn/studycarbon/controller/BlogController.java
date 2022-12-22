@@ -2,6 +2,7 @@ package cn.studycarbon.controller;
 
 import java.util.List;
 
+import cn.studycarbon.domain.Blog;
 import cn.studycarbon.domain.User;
 import cn.studycarbon.domain.es.EsBlog;
 import cn.studycarbon.service.EsBlogService;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BlogController {
 
     // 日志
-    private static Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static Logger logger = LoggerFactory.getLogger(BlogController.class);
 
     @Autowired
     private EsBlogService esBlogService;
@@ -45,7 +46,7 @@ public class BlogController {
             @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
             Model model) {
 
-        logger.debug("order:{},keyword:{},async:{},pageIndex{},pageSize{}", order, keyword, async, pageIndex, pageSize);
+        logger.info("order:{},keyword:{},async:{},pageIndex:{},pageSize:{}", order, keyword, async, pageIndex, pageSize);
 
         Page<EsBlog> page = null;
         List<EsBlog> list = null;
@@ -57,13 +58,17 @@ public class BlogController {
                 Sort sort = Sort.by(Direction.DESC, "readSize", "commentSize", "voteSize", "createTime");
                 Pageable pageable = PageRequest.of(pageIndex, pageSize, sort);
                 page = esBlogService.listHotestEsBlogs(keyword, pageable);
-            } else if (order.equals("new")) { // 最新查询
+            }
+
+            if (order.equals("new")) {
+                // 最新查询
                 Sort sort = Sort.by(Direction.DESC, "createTime");
                 Pageable pageable = PageRequest.of(pageIndex, pageSize, sort);
                 page = esBlogService.listNewestEsBlogs(keyword, pageable);
             }
             isEmpty = false;
         } catch (Exception e) {
+            logger.info("Exception:" + e.getMessage());
             Pageable pageable = PageRequest.of(pageIndex, pageSize);
             page = esBlogService.listEsBlogs(pageable);
         }
@@ -85,6 +90,11 @@ public class BlogController {
         if (!async && !isEmpty) {
             List<EsBlog> newest = esBlogService.listTop5NewestEsBlogs();
             model.addAttribute("newest", newest);
+
+            for (EsBlog blog : newest) {
+                logger.debug("newest bolg:"+blog);
+            }
+
             List<EsBlog> hotest = esBlogService.listTop5HotestEsBlogs();
             model.addAttribute("hotest", hotest);
             List<TagVO> tags = esBlogService.listTop30Tags();

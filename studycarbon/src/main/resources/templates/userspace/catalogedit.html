@@ -1,9 +1,9 @@
 <div class="container" th:object="${catalog}">
  <form id="catalogForm">
 	<input type="hidden" name="id" th:value="*{id}" id="catalogId">
-	<div class="form-group">
-		<label for="name" class="col-form-label">名称</label>
-		<input type="text" class="form-control" id="catalogName" name="name" th:value="*{name}" maxlength="30" placeholder="请输入分类名，至少2个字符，至多30个" >
+	<div class="form-group row">
+		<label for="name" class="col-form-label col-sm-2">名称:</label>
+		<input type="text" class="form-control col-sm-6"  id="catalogName" name="name" th:value="*{name}" maxlength="30" placeholder="请输入分类名，至少2个字符，至多30个" >
 	</div>
  </form>
 </div>
