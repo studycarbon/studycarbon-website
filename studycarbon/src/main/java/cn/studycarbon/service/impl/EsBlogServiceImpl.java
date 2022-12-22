@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import cn.studycarbon.domain.Blog;
 import cn.studycarbon.domain.User;
 import cn.studycarbon.domain.es.EsBlog;
 import cn.studycarbon.repository.es.EsBlogRepository;
@@ -193,5 +194,16 @@ public class EsBlogServiceImpl implements EsBlogService {
         //List<User> list = userService.listUsersByUsernames(usernamelist);
 
         return null;
+    }
+
+    @Override
+    public List<EsBlog> listBlog() {
+        List<EsBlog> esBlogList = new ArrayList<>();
+        Iterator<EsBlog> esBlogIterator = esBlogRepository.findAll().iterator();
+        while (esBlogIterator.hasNext()) {
+            EsBlog blog = esBlogIterator.next();
+            esBlogList.add(blog);
+        }
+        return  esBlogList;
     }
 }

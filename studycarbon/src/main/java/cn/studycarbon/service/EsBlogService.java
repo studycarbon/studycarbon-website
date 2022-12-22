@@ -3,6 +3,7 @@ package cn.studycarbon.service;
 
 import java.util.List;
 
+import cn.studycarbon.domain.Blog;
 import cn.studycarbon.domain.User;
 import cn.studycarbon.domain.es.EsBlog;
 import cn.studycarbon.vo.TagVO;
@@ -41,4 +42,6 @@ public interface EsBlogService {
 
     // 最热前12用户
     List<User> listTop12Users();
+
+    List<EsBlog> listBlog();
 }

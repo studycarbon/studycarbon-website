@@ -88,18 +88,13 @@
                 <!-- 热门文章 -->
                 <div class="card my-4">
                     <h5 class="card-header"><i class="fa fa-fire" aria-hidden="true"></i> 热门文章</h5>
-
-<!--                    <ul class="list-group">-->
-<!--                        <a href="/u/waylau/blogs/1" class="list-group-item" title="waylau">-->
-<!--                            Spring Data + Thymeleaf 3 + Bootstrap 4 实现分页器<span class="badge badge-danger badge-pill">11115</span>-->
-<!--                        </a>-->
-<!--                    </ul>-->
                     <div class="card-block">
                         <div class="row">
                             <div class="col-lg-12">
-                                <ul class="list-group" th:each="hotblog , hotblogStat : ${hotest}" th:object="${hotblog}">
-                                    <a  th:href="'/u/'+*{username} +'/blogs/'+ *{blogId}" class="list-group-item">
-                                        [[*{title}]]<span class="badge badge-pill" th:classappend="${hotblogStat.index} eq 0 ? 'badge-danger': (${hotblogStat.index} eq 1 ? 'badge-warning':(${hotblogStat.index} eq 2 ? 'badge-info':'badge-default'))">[[*{readSize}]]</span>
+                                <ul class="list-group " th:each="hotblog , hotblogStat : ${hotest}" th:object="${hotblog}">
+                                    <a  th:href="'/u/'+*{username} +'/blogs/'+ *{blogId}" class="list-group-item" style="border-radius: 0px;">
+                                        [[*{title}]]
+                                        <span class="badge badge-pill" th:classappend="${hotblogStat.index} eq 0 ? 'badge-danger': (${hotblogStat.index} eq 1 ? 'badge-warning':(${hotblogStat.index} eq 2 ? 'badge-info':'badge-default'))">[[*{readSize}]]</span>
                                     </a>
                                 </ul>
                             </div>
@@ -114,7 +109,9 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <ul class="list-group" th:each="newblog : ${newest}" th:object="${newblog}">
-                                    <a  th:href="'/u/'+*{username} +'/blogs/'+ *{blogId}" class="list-group-item" th:text="*{title}"></a>
+                                    <a  th:href="'/u/'+*{username} +'/blogs/'+ *{blogId}" class="list-group-item" th:text="*{title}" style="border-radius: 0px;">
+
+                                    </a>
                                 </ul>
                             </div>
                         </div>

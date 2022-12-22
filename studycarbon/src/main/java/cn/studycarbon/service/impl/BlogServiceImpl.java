@@ -86,7 +86,8 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void readingIncrease(Long id) {
         Blog blog = blogRepository.findById(id).get();
-        blog.setReadSize(blog.getCommentSize() + 1);
+        blog.setReadSize(blog.getReadSize() + 1);
+        System.out.println("readingIncrease:id:"+id+"readsize:"+blog.getReadSize());
         this.saveBlog(blog);
     }
 

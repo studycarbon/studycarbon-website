@@ -171,7 +171,7 @@ public class UserspaceController {
         User principal = null;
         Blog blog = blogService.getBlogById(id);
         // 每次读取，简单的可以认为阅读量增加1次
-        // blogService.readingIncrease(id);
+        blogService.readingIncrease(id);
         // 判断操作用户是否是博客的所有者
         boolean isBlogOwner = false;
         if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
