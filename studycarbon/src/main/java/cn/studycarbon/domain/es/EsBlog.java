@@ -1,6 +1,8 @@
 package cn.studycarbon.domain.es;
 
 import cn.studycarbon.domain.Blog;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -10,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 // pojo
 // java实体对象为啥一定要实现Serializable接口
@@ -90,7 +93,7 @@ public class EsBlog implements Serializable {
         this.content = content;
         this.username = username;
         this.avatar = avatar;
-        this.createTime = createTime;
+        //this.createTime = createTime;
         this.readSize = readSize;
         this.commentSize = commentSize;
         this.voteSize = voteSize;
@@ -104,7 +107,7 @@ public class EsBlog implements Serializable {
         this.content = blog.getContent();
         this.username = blog.getUser().getUsername();
         this.avatar = blog.getUser().getAvatar();
-        this.createTime = blog.getCreateTime();
+        // this.createTime = blog.getCreateTime();
         this.readSize = blog.getReadSize();
         this.commentSize = blog.getCommentSize();
         this.voteSize = blog.getVoteSize();
@@ -117,7 +120,7 @@ public class EsBlog implements Serializable {
         this.summary = blog.getSummary();
         this.content = blog.getContent();
         this.avatar = blog.getUser().getAvatar();
-        this.createTime = blog.getCreateTime();
+        //this.createTime = blog.getCreateTime();
         this.readSize = blog.getReadSize();
         this.commentSize = blog.getCommentSize();
         this.voteSize = blog.getVoteSize();

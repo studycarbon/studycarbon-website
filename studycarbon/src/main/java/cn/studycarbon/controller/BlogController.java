@@ -6,6 +6,8 @@ import cn.studycarbon.domain.User;
 import cn.studycarbon.domain.es.EsBlog;
 import cn.studycarbon.service.EsBlogService;
 import cn.studycarbon.vo.TagVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +24,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/blogs")
 public class BlogController {
- 
+
+	// 日志
+	private static Logger logger = LoggerFactory.getLogger(UserController.class);
+
 	@Autowired
     private EsBlogService esBlogService;
 
@@ -35,7 +40,9 @@ public class BlogController {
 			@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
 			@RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
 			Model model) {
- 
+
+		logger.debug("order:{},keyword:{},async:{},pageIndex{},pageSize{}", order, keyword, async, pageIndex, pageSize);
+
 		Page<EsBlog> page = null;
 		List<EsBlog> list = null;
 		boolean isEmpty = true; // 系统初始化时，没有博客数据
@@ -65,7 +72,7 @@ public class BlogController {
 		model.addAttribute("page", page);
 		model.addAttribute("blogList", list);
 		
-		// 首次访问页面才加载
+		// 首次访问页面才加载 最新发布的文章 热门发布文章 热门用户 热门标签
 		if (!async && !isEmpty) {
 			List<EsBlog> newest = esBlogService.listTop5NewestEsBlogs();
 			model.addAttribute("newest", newest);

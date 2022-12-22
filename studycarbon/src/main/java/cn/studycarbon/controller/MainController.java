@@ -41,7 +41,7 @@ public class MainController {
     @GetMapping("/index")
     public String index() {
         logger.info("get index.");
-        return "index";
+        return "redirect:/blogs";
     }
 
     // 登录

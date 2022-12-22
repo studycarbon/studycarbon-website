@@ -58,36 +58,27 @@ public class EsBlogServiceImpl implements EsBlogService {
 	 */
 	@Override
 	public void removeEsBlog(String id) {
-		// esBlogRepository.delete(id);
 		esBlogRepository.deleteById(id);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.waylau.spring.boot.blog.service.EsBlogService#updateEsBlog(com.waylau.spring.boot.blog.domain.es.EsBlog)
-	 */
 	@Override
 	public EsBlog updateEsBlog(EsBlog esBlog) {
 		return esBlogRepository.save(esBlog);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.waylau.spring.boot.blog.service.EsBlogService#getEsBlogByBlogId(java.lang.Long)
-	 */
+
 	@Override
 	public EsBlog getEsBlogByBlogId(Long blogId) {
 		return esBlogRepository.findByBlogId(blogId);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.waylau.spring.boot.blog.service.EsBlogService#listNewestEsBlogs(java.lang.String, org.springframework.data.domain.Pageable)
-	 */
+
 	@Override
 	public Page<EsBlog> listNewestEsBlogs(String keyword, Pageable pageable) throws SearchParseException {
 		Page<EsBlog> pages = null;
-		// Sort sort = new Sort(Direction.DESC,"createTime");
+		// 构建排序器
 		Sort sort = Sort.by(Direction.DESC, "createTime");
 		if (pageable.getSort() == null) {
-			//pageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), sort);
 			pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
 		}
  

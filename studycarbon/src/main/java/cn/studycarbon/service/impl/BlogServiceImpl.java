@@ -26,17 +26,17 @@ public class BlogServiceImpl implements BlogService {
 	@Override
 	public Blog saveBlog(Blog blog) {
 		// 判断是否是新创建的博客
-		//boolean isNew = (blog.getId() == null);
-		//EsBlog esBlog = null;
+		boolean isNew = (blog.getId() == null);
+		EsBlog esBlog = null;
 		Blog returnBlog = blogRepository.save(blog);
 		// 暂时不进行博客搜索相关内容
-		// if (isNew) {
-		//	esBlog = new EsBlog(returnBlog);
-		//} else {
-		//	esBlog = esBlogService.getEsBlogByBlogId(blog.getId());
-		//	esBlog.update(returnBlog);
-		//}
-		//esBlogService.updateEsBlog(esBlog);
+		 if (isNew) {
+			esBlog = new EsBlog(returnBlog);
+		} else {
+			esBlog = esBlogService.getEsBlogByBlogId(blog.getId());
+			esBlog.update(returnBlog);
+		}
+		esBlogService.updateEsBlog(esBlog);
 		return returnBlog;
 	}
 
