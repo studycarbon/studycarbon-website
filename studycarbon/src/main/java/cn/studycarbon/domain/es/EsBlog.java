@@ -85,8 +85,8 @@ public class EsBlog implements Serializable {
         this.content = content;
     }
 
-    public EsBlog(Long blogId, String title, String summary, String content, String username, String avatar,Timestamp createTime,
-                  Integer readSize,Integer commentSize, Integer voteSize , String tags) {
+    public EsBlog(Long blogId, String title, String summary, String content, String username, String avatar, Timestamp createTime,
+                  Integer readSize, Integer commentSize, Integer voteSize, String tags) {
         this.blogId = blogId;
         this.title = title;
         this.summary = summary;
@@ -100,7 +100,7 @@ public class EsBlog implements Serializable {
         this.tags = tags;
     }
 
-    public EsBlog(Blog blog){
+    public EsBlog(Blog blog) {
         this.blogId = blog.getId();
         this.title = blog.getTitle();
         this.summary = blog.getSummary();

@@ -32,7 +32,7 @@ public class ThymeleafUserDao {
     }
 
     public ThymeleafUser getUserById(Long id) {
-        return  thymeleafMap.get(id);
+        return thymeleafMap.get(id);
     }
 
     public List<ThymeleafUser> listUser() {

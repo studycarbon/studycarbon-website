@@ -4,14 +4,15 @@ import cn.studycarbon.domain.Comment;
 
 /**
  * Comment 服务接口.
- * 
- * @since 1.0.0 2017年4月9日
+ *
  * @author <a href="https://waylau.com">Way Lau</a>
+ * @since 1.0.0 2017年4月9日
  */
 
 public interface CommentService {
-	// 根据id获取 Comment
-	Comment getCommentById(Long id);
-	// 删除评论
-	void removeComment(Long id);
+    // 根据id获取 Comment
+    Comment getCommentById(Long id);
+
+    // 删除评论
+    void removeComment(Long id);
 }

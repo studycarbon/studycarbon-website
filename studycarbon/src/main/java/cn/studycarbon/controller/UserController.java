@@ -84,7 +84,7 @@ public class UserController {
     public ModelAndView createForm(Model model) {
         //System.out.println("===================================================list===================================================");
         User user = new User(null, null, null);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         //System.out.println(user);
         return new ModelAndView("users/add", "userModel", model);
     }
@@ -132,9 +132,9 @@ public class UserController {
         try {
             userService.removeUser(id);
         } catch (Exception e) {
-            return  ResponseEntity.ok().body( new Response(false, e.getMessage()));
+            return ResponseEntity.ok().body(new Response(false, e.getMessage()));
         }
-        return  ResponseEntity.ok().body( new Response(true, "处理成功"));
+        return ResponseEntity.ok().body(new Response(true, "处理成功"));
     }
 
     // 获取修改用户的界面，及数据

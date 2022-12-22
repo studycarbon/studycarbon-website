@@ -6,29 +6,29 @@ import java.io.Serializable;
 import cn.studycarbon.domain.Catalog;
 
 public class CatalogVO implements Serializable {
- 
-	private static final long serialVersionUID = 1L;
-	
-	private String username;
-	private Catalog catalog;
-	
-	public CatalogVO() {
-	}
 
-	public String getUsername() {
-		return username;
-	}
+    private static final long serialVersionUID = 1L;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    private String username;
+    private Catalog catalog;
 
-	public Catalog getCatalog() {
-		return catalog;
-	}
+    public CatalogVO() {
+    }
 
-	public void setCatalog(Catalog catalog) {
-		this.catalog = catalog;
-	}
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Catalog getCatalog() {
+        return catalog;
+    }
+
+    public void setCatalog(Catalog catalog) {
+        this.catalog = catalog;
+    }
 
 }

@@ -5,6 +5,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 // 持久化bean验证
@@ -15,7 +16,7 @@ public class ConstraintViolationExceptionHandler {
             msgList.add(constraintViolation.getMessage());
         }
 
-        String messages = StringUtils.join(msgList.toString(),";");
+        String messages = StringUtils.join(msgList.toString(), ";");
         return messages;
     }
 }

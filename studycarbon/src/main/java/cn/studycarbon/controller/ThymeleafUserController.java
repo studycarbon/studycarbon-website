@@ -20,16 +20,16 @@ public class ThymeleafUserController {
     @GetMapping
     public ModelAndView list(Model model) {
         model.addAttribute("userList", thymeleafRepo.findAll());
-        model.addAttribute("title","用户管理");
-        return new ModelAndView("thymeleafUser/list","userModel", model);
+        model.addAttribute("title", "用户管理");
+        return new ModelAndView("thymeleafUser/list", "userModel", model);
     }
 
     // /thymeleafUsers/{id}
     @GetMapping("{id}")
     public ModelAndView view(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", thymeleafRepo.findById(id).get());
-        model.addAttribute("title","查看用户");
-        return new ModelAndView("thymeleafUser/view","userModel", model);
+        model.addAttribute("title", "查看用户");
+        return new ModelAndView("thymeleafUser/view", "userModel", model);
     }
 
     // 获取创建表单页面
@@ -38,8 +38,8 @@ public class ThymeleafUserController {
     public ModelAndView createForm(Model model) {
         ThymeleafUser user = new ThymeleafUser();
         model.addAttribute("user", user);
-        model.addAttribute("title","创建用户");
-        return new ModelAndView("thymeleafUser/form","userModel", model);
+        model.addAttribute("title", "创建用户");
+        return new ModelAndView("thymeleafUser/form", "userModel", model);
     }
 
     // 保存或者更新用户
@@ -59,7 +59,7 @@ public class ThymeleafUserController {
     public ModelAndView modify(@PathVariable("id") Long id, Model model) {
         ThymeleafUser user = thymeleafRepo.findById(id).get();
         model.addAttribute("user", user);
-        model.addAttribute("title","修改用户");
-        return new ModelAndView("thymeleafUser/form","userModel", model);
+        model.addAttribute("title", "修改用户");
+        return new ModelAndView("thymeleafUser/form", "userModel", model);
     }
 }

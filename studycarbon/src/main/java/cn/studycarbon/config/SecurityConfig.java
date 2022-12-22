@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 // 处理@PreAuthorize 不起作用 参考：https://blog.csdn.net/weixin_41195786/article/details/84439384
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled=true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String KEY = "studycarbon.cn";
@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/css/**","/js/**/","/fonts/**","/index").permitAll()
+                .antMatchers("/css/**", "/js/**/", "/fonts/**", "/index").permitAll()
                 .antMatchers("/admins/**").hasRole("ADMIN") // admins需要登录
                 .and()
                 .formLogin()
