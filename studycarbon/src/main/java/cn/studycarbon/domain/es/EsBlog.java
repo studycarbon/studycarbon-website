@@ -33,13 +33,13 @@ public class EsBlog implements Serializable {
     @Field(type = FieldType.Long)
     private Long blogId;
 
-    @Field(type = FieldType.Text, analyzer = "ik_smart")
+    @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String title;
 
-    @Field(type = FieldType.Text, analyzer = "ik_smart")
+    @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String summary;
 
-    @Field(type = FieldType.Text, analyzer = "ik_smart")
+    @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String content;
 
     // 不做全文检索字段
@@ -86,7 +86,6 @@ public class EsBlog implements Serializable {
 
     public EsBlog(Long blogId, String title, String summary, String content, String username, String avatar, Timestamp createTime,
                   Integer readSize, Integer commentSize, Integer voteSize, String tags) {
-        System.out.println(" EsBlog(Blog blog)1=================================================");
         this.blogId = blogId;
         this.title = title;
         this.summary = summary;
@@ -101,7 +100,6 @@ public class EsBlog implements Serializable {
     }
 
     public EsBlog(Blog blog) {
-        System.out.println(" EsBlog(Blog blog)2=================================================");
         this.blogId = blog.getId();
         this.title = blog.getTitle();
         this.summary = blog.getSummary();
@@ -116,7 +114,6 @@ public class EsBlog implements Serializable {
     }
 
     public void update(Blog blog) {
-        System.out.println(" update(Blog blog)=================================================");
         this.blogId = blog.getId();
         this.title = blog.getTitle();
         this.summary = blog.getSummary();

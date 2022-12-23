@@ -90,9 +90,10 @@
                     <a class="nav-link" data-th-classappend="${order} eq 'hot' ? 'active' : ''" href="javascript:void(0)" th:attr="url='/u/'+${user.username}+'/blogs?order=hot'">最热</a>
                 </li>
 
+                <!--搜索框内容-->
                 <form class="form-inline mt-2 mt-md-0" style="margin-left: 10px;">
-                    <input class="form-control mr-sm-2"  style="margin-right: 0px !important;border-top-right-radius: 0px;border-bottom-right-radius: 0px;" type="text" placeholder="搜索">
-                    <a href="/u/waylau/blogs?keyword=ww" class="btn btn-outline-secondary my-2 my-sm-0" style="border-top-left-radius: 0px;border-bottom-left-radius: 0px;">
+                    <input class="form-control mr-sm-2"  style="margin-right: 0px !important;border-top-right-radius: 0px;border-bottom-right-radius: 0px;" type="text" placeholder="搜索" id="keyword" th:value="${keyword}">
+                    <a href="javascript:void(0)" class="btn btn-outline-secondary my-2 my-sm-0" style="border-top-left-radius: 0px;border-bottom-left-radius: 0px;" id="searchBlogs">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </a>
                 </form>
