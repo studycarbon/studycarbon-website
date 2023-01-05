@@ -39,17 +39,40 @@ public class Comment implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "blog_id")
+    private Blog blog;
+
     @Column(nullable = false) // 映射为字段，值不能为空
     @org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
     private Timestamp createTime;
 
-    protected Comment() {
-        // TODO Auto-generated constructor stub
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", user=" + user +
+                ", createTime=" + createTime +
+                '}';
     }
 
-    public Comment(User user, String content) {
+    // 构造函数设置为保护
+    protected Comment() {
+    }
+
+    public Comment(User user, String content, Blog blog) {
         this.content = content;
         this.user = user;
+        this.blog = blog;
+    }
+
+    public Blog getBlog() {
+        return blog;
+    }
+
+    public void setBlog(Blog blog) {
+        this.blog = blog;
     }
 
     public Long getId() {

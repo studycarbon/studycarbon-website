@@ -10,7 +10,7 @@ $(function() {
 
     // 菜单事件
     $(".blog-menu .list-group-item").click(function() {
-
+        // 获取到链接
         var url = $(this).attr("url");
 
         // 先移除其他的点击样式，再添加当前的点击样式

@@ -24,12 +24,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.github.rjeschke.txtmark.Processor;
 
-//
-// Blog 实体
-//
-// @since 1.0.0 2017年4月7日
-// @author <a href="https://waylau.com">Way Lau</a>
-//
 @Entity // 实体
 // @Document(indexName = "blog")
 public class Blog implements Serializable {

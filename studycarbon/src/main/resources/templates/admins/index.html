@@ -22,12 +22,10 @@
                 <!--菜单项目下的具体内容-->
 	            <ul class="list-group blog-menu"  th:each="menu : ${model.list}">
                     <!--javascript:void(0)用户点击后不发生任何动作-->
-	                <a href="javascript:void(0)" class="list-group-item"  th:title="${menu.name}" th:text="${menu.name}"
-                       data-th-attr="url=${menu.url}">
+	                <a href="javascript:void(0)" class="list-group-item"  th:title="${menu.name}" th:text="${menu.name}" data-th-attr="url=${menu.url}">
 	                   	 用户管理
 	                </a>
                 </ul>
-
 	        </div>
         </div>
 

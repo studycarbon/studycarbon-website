@@ -68,7 +68,8 @@ public class UserController {
                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                              @RequestParam(value = "name", required = false, defaultValue = "") String name,
                              Model model) {
-        logger.debug("===========================================================list========================================================");
+        logger.info("get users list: async<{}>, pageIndex<{}>, pageSize<{}>, name<{}>", async, pageIndex, pageSize, name);
+
         Pageable pageable = PageRequest.of(pageIndex, pageSize);
         Page<User> page = userService.listUsersByNameLike(name, pageable);
 
@@ -76,7 +77,7 @@ public class UserController {
         List<User> list = page.getContent();
         model.addAttribute("page", page);
         model.addAttribute("userList", list);
-        return new ModelAndView(async == true ? "users/list :: #mainContainerRepleace" : "users/list", "userModel", model);
+        return new ModelAndView(async == true ? "users/list::#mainContainerRepleace" : "users/list", "userModel", model);
     }
 
     // 获取form表单页面

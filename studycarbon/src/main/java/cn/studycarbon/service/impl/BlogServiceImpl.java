@@ -95,7 +95,7 @@ public class BlogServiceImpl implements BlogService {
     public Blog createComment(Long blogId, String commentContent) {
         Blog originalBlog = blogRepository.findById(blogId).get();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Comment comment = new Comment(user, commentContent);
+        Comment comment = new Comment(user, commentContent, originalBlog);
         originalBlog.addComment(comment);
         return this.saveBlog(originalBlog);
     }

@@ -3,9 +3,12 @@ package cn.studycarbon.service.impl;
 import javax.transaction.Transactional;
 
 import cn.studycarbon.domain.Comment;
+import cn.studycarbon.domain.User;
 import cn.studycarbon.repository.CommentRepository;
 import cn.studycarbon.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,19 +23,19 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-    /* (non-Javadoc)
-     * @see com.waylau.spring.boot.blog.service.CommentService#removeComment(java.lang.Long)
-     */
     @Override
     @Transactional
     public void removeComment(Long id) {
-        //commentRepository.delete(id);
         commentRepository.deleteById(id);
     }
 
     @Override
+    public Page<Comment> listCommentsByContentContaining(String content, Pageable pageable) {
+        return commentRepository.findCommentByContentContaining(content, pageable);
+    }
+
+    @Override
     public Comment getCommentById(Long id) {
-        //return commentRepository.findOne(id);
         return commentRepository.findById(id).get();
     }
 

@@ -1,6 +1,9 @@
 package cn.studycarbon.service;
 
 import cn.studycarbon.domain.Comment;
+import cn.studycarbon.domain.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Comment 服务接口.
@@ -15,4 +18,6 @@ public interface CommentService {
 
     // 删除评论
     void removeComment(Long id);
+
+    Page<Comment> listCommentsByContentContaining(String content, Pageable pageable);
 }
