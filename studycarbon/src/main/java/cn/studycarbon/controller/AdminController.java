@@ -1,6 +1,8 @@
 package cn.studycarbon.controller;
 
 import cn.studycarbon.vo.Menu;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +15,19 @@ import java.util.List;
 @Controller
 @RequestMapping("/admins")
 public class AdminController {
+    // 日志
+    private static Logger logger = LoggerFactory.getLogger(AdminController.class);
+
     @GetMapping
-    public ModelAndView listUsers(Model model) {
+    public ModelAndView adminView(Model model) {
+        logger.info("get admin views =>");
+        System.out.println("=================get addmin views=====================");
         List<Menu> list = new ArrayList<>();
         list.add(new Menu("用户管理", "/users"));
         list.add(new Menu("角色管理", "/roles"));
         list.add(new Menu("博客管理", "/blogs"));
         list.add(new Menu("评论管理", "/comments/all"));
         model.addAttribute("list", list);
-        return new ModelAndView("/admins/index", "model", model);
+        return new ModelAndView("admins/index", "model", model);
     }
 }

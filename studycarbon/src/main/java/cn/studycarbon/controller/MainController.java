@@ -55,7 +55,7 @@ public class MainController {
     // 登录错误
     @GetMapping("/login-error")
     public String loginError(Model model) {
-        System.out.println("loginError==============================================");
+        logger.info("login error =>");
         model.addAttribute("loginError", true);
         model.addAttribute("errorMsg", "登录失败，用户名或者密码错误");
         return "login";

@@ -66,7 +66,7 @@ public class UserspaceController {
         User user = (User) userDetailsService.loadUserByUsername(username);
         logger.info("[profile] user:" + user);
         model.addAttribute("user", user);
-        return new ModelAndView("/userspace/profile", "userModel", model);
+        return new ModelAndView("userspace/profile", "userModel", model);
     }
 
     // 保存个人设置, 保存完毕后，重新定向到个人设置页面
@@ -96,7 +96,7 @@ public class UserspaceController {
     public ModelAndView avatar(@PathVariable("username") String username, Model model) {
         User user = (User) userDetailsService.loadUserByUsername(username);
         model.addAttribute("user", user);
-        return new ModelAndView("/userspace/avatar", "userModel", model);
+        return new ModelAndView("userspace/avatar", "userModel", model);
     }
 
     // 修改用户头像
@@ -155,7 +155,7 @@ public class UserspaceController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("page", page);
         model.addAttribute("blogList", list);
-        return (async == true ? "/userspace/u :: #mainContainerRepleace" : "/userspace/u");
+        return (async == true ? "userspace/u::#mainContainerRepleace" : "userspace/u");
     }
 
     /**
@@ -200,7 +200,7 @@ public class UserspaceController {
         model.addAttribute("blogModel", blog);
         model.addAttribute("currentVote", currentVote);
 
-        return "/userspace/blog";
+        return "userspace/blog";
     }
 
 
@@ -226,7 +226,7 @@ public class UserspaceController {
         List<Catalog> catalogs = catalogService.listCatalogs(user);
         model.addAttribute("blog", new Blog(null, null, null));
         model.addAttribute("catalogs", catalogs);
-        return new ModelAndView("/userspace/blogedit", "blogModel", model);
+        return new ModelAndView("userspace/blogedit", "blogModel", model);
     }
 
     // 获取编辑博客的界面
@@ -238,22 +238,14 @@ public class UserspaceController {
         List<Catalog> catalogs = catalogService.listCatalogs(user);
         model.addAttribute("blog", blogService.getBlogById(id));
         model.addAttribute("catalogs", catalogs);
-        return new ModelAndView("/userspace/blogedit", "blogModel", model);
+        return new ModelAndView("userspace/blogedit", "blogModel", model);
     }
 
     // 保存博客
     @PostMapping("/{username}/blogs/edit")
     @PreAuthorize("authentication.name.equals(#username)")
     public ResponseEntity<Response> saveBlog(@PathVariable("username") String username, @RequestBody Blog blog) {
-        logger.info("save blog");
-
-        // 测试代码
-//        List<Blog> blogs = blogService.getAllBlogs();
-//        for (Blog blog1 : blogs) {
-//            blogService.saveBlog(blog1);
-//        }
-        // 测试代码结束
-
+        logger.info("save blog => ");
 
         // 对 Catalog 进行空处理
         if (blog.getCatalog().getId() == null) {

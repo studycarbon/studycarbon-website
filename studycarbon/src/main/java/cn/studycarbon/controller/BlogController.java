@@ -103,7 +103,13 @@ public class BlogController {
             model.addAttribute("users", users);
         }
 
-        return (async == true ? "/index :: #mainContainerRepleace" : "/index");
+        // 返回主页实体内容
+        if (async) {
+            return "index::#mainContainerRepleace";
+        }
+
+        // 返回主页
+        return "index";
     }
 
     // 最新的5篇文章

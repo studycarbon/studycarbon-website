@@ -1,3 +1,6 @@
+#server:
+#  port: 8080
+
 spring:
   thymeleaf:
     cache: false    #不使用缓存，热加载
@@ -13,7 +16,7 @@ spring:
 
 # datasource
   datasource:
-    url: jdbc:mysql://localhost/blog?userSSL=false&serverTimezone=UTC&characterEncoding=utf-8 #设置jdbc url
+    url: jdbc:mysql://localhost/blog?userSSL=false&serverTimezone=UTC #设置jdbc url
     username: root                              #用户名
     password: 123456                            #密码
     driver-class-name: com.mysql.cj.jdbc.Driver # 驱动项配置

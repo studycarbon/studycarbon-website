@@ -67,7 +67,7 @@ public class CommentController {
 
         model.addAttribute("commentOwner", commentOwner);
         model.addAttribute("comments", comments);
-        return "/userspace/blog :: #mainContainerRepleace";
+        return "userspace/blog :: #mainContainerRepleace";
     }
 
     /*
@@ -88,9 +88,9 @@ public class CommentController {
         model.addAttribute("page", page);
         model.addAttribute("commentList", commentList);
         if (async) {
-            return "/comments/list::#mainContainerRepleace";
+            return "comments/list::#mainContainerRepleace";
         }
-        return "/comments/list";
+        return "comments/list";
     }
 
     /**
