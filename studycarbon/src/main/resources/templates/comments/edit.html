@@ -1,0 +1,12 @@
+<div class="container">
+
+    <form th:action="@{/comments/update}" method="post" th:object="${comment}" id="commentForm">
+         <!--评论id-->
+        <input type="hidden" name="id" th:value="*{id}">
+        <div class="form-group ">
+            <label for="comment-content" class="col-form-label">修改评论:</label>
+            <input type="text" class="form-control" id="comment-content" name="content" th:value="*{content}" maxlength="50" placeholder="请输入账号，至少3个字符，至多20个">
+        </div>
+    </form>
+
+</div>
