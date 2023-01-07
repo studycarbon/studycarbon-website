@@ -2,7 +2,6 @@ package cn.studycarbon.controller;
 
 import java.util.List;
 
-import cn.studycarbon.domain.Blog;
 import cn.studycarbon.domain.User;
 import cn.studycarbon.domain.es.EsBlog;
 import cn.studycarbon.service.EsBlogService;
@@ -110,6 +109,27 @@ public class BlogController {
 
         // 返回主页
         return "index";
+    }
+
+    // 列出所有博客数据
+    @GetMapping("/all")
+    public String listAllBlogs(@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+                               @RequestParam(value = "async", required = false) boolean async,
+                               @RequestParam(value = "pageIndex", required = false, defaultValue = "0") int pageIndex,
+                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+                               Model model)
+    {
+        logger.info("get all blogs <get /blogs/all> => keyword:<{}>, async:<{}>, pageIndex:<{}>, pageSize<{}>", keyword, async, pageIndex, pageSize);
+        Sort sort = Sort.by(Direction.ASC, "createTime");
+        Pageable pageable = PageRequest.of(pageIndex, pageSize, sort);
+        Page<EsBlog> page = esBlogService.listNewestEsBlogs(keyword, pageable);
+        List<EsBlog> esBlogList = page.getContent();
+        model.addAttribute("page", page);
+        model.addAttribute("blogList", esBlogList);
+        if (async) {
+            return  "blogs/list::#mainContainerRepleace";
+        }
+        return  "blogs/list";
     }
 
     // 最新的5篇文章

@@ -170,9 +170,16 @@ public class CommentController {
     public ResponseEntity<Response> updateComment(Comment comment)
     {
         logger.info("update comment => comment {}", comment);
+        if (comment == null) {
+            logger.info("update comment err, comment is empty!");
+            return ResponseEntity.ok().body(new Response(false, "评论为空，请检查"));
+        }
+
         try {
             commentService.updateComment(comment);
+            logger.info("update comment suc, comment:{}", comment);
         } catch (Exception e) {
+            logger.info("update comment err, comment:{}", comment);
             return ResponseEntity.ok().body(new Response(false, e.getMessage()));
         }
         return  ResponseEntity.ok().body(new Response(true, "处理成功", null));
