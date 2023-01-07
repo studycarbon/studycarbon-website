@@ -16,7 +16,7 @@ spring:
 
 # datasource
   datasource:
-    url: jdbc:mysql://localhost/blog?userSSL=false&serverTimezone=UTC #设置jdbc url
+    url: jdbc:mysql://192.168.31.202:3306/blog?userSSL=false&serverTimezone=UTC #设置jdbc url
     username: root                              #用户名
     password: 123456                            #密码
     driver-class-name: com.mysql.cj.jdbc.Driver # 驱动项配置
@@ -34,7 +34,7 @@ spring:
     password: 123456 # 密码
     connection-timeout: 1s  # 连接超时时间
     socket-timeout: 30s #
-    uris: ${ES_HOST:localhost}:${ES_PORT:9200} # 端口位置
+    uris: ${ES_HOST:192.168.31.202}:${ES_PORT:9200} # 端口位置
 
   main:
     allow-circular-references: true

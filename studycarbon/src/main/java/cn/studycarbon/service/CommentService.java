@@ -19,5 +19,8 @@ public interface CommentService {
     // 删除评论
     void removeComment(Long id);
 
+    // 更新评论
+    void updateComment(Comment comment);
+
     Page<Comment> listCommentsByContentContaining(String content, Pageable pageable);
 }

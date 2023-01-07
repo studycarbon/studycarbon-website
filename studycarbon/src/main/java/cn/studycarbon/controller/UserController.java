@@ -93,6 +93,7 @@ public class UserController {
     //新建用户
     @PostMapping
     public ResponseEntity<Response> create(User user, Long authorityId) {
+        logger.info("create user =>");
         List<Authority> authorities = new ArrayList<>();
         authorities.add(authorityService.getAuthorityById(authorityId));
         user.setAuthorities(authorities);

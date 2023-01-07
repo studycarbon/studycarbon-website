@@ -18,14 +18,14 @@ public class AdminController {
     // 日志
     private static Logger logger = LoggerFactory.getLogger(AdminController.class);
 
+    // 判断该路径是否被拦截, 会判断该
     @GetMapping
     public ModelAndView adminView(Model model) {
         logger.info("get admin views =>");
-        System.out.println("=================get addmin views=====================");
         List<Menu> list = new ArrayList<>();
         list.add(new Menu("用户管理", "/users"));
         list.add(new Menu("角色管理", "/roles"));
-        list.add(new Menu("博客管理", "/blogs"));
+        list.add(new Menu("博客管理", "/blogs/all"));
         list.add(new Menu("评论管理", "/comments/all"));
         model.addAttribute("list", list);
         return new ModelAndView("admins/index", "model", model);

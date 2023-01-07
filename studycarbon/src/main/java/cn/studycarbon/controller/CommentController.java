@@ -155,4 +155,28 @@ public class CommentController {
 
         return ResponseEntity.ok().body(new Response(true, "处理成功", null));
     }
+
+    // 获取编辑评论
+    @GetMapping(value = "edit/{id}")
+    public ModelAndView editComment(@PathVariable("id") Long id, Model model) {
+        // 获取到评论
+        Comment comment = commentService.getCommentById(id);
+        model.addAttribute("comment", comment);
+        return  new ModelAndView("comments/edit");
+    }
+
+    // 修改编辑
+    @PostMapping("/update")
+    public ResponseEntity<Response> updateComment(Comment comment)
+    {
+        logger.info("update comment => comment {}", comment);
+        try {
+            commentService.updateComment(comment);
+        } catch (Exception e) {
+            return ResponseEntity.ok().body(new Response(false, e.getMessage()));
+        }
+        return  ResponseEntity.ok().body(new Response(true, "处理成功", null));
+    }
+
+
 }

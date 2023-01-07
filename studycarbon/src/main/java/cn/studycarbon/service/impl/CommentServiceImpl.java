@@ -30,6 +30,14 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional
+    public void updateComment(Comment comment) {
+        Comment orginComment = getCommentById(comment.getId());
+        orginComment.setContent(comment.getContent());
+        commentRepository.save(orginComment);
+    }
+
+    @Override
     public Page<Comment> listCommentsByContentContaining(String content, Pageable pageable) {
         return commentRepository.findCommentByContentContaining(content, pageable);
     }
