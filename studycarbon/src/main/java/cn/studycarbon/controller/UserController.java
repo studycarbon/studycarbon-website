@@ -41,7 +41,8 @@ public class UserController {
     private AuthorityService authorityService;
 
     // 查询所有用户
-    /* @RequestParam 用于将请求参数映射到功能处理方法的参数上。
+    /**
+     *  @RequestParam 用于将请求参数映射到功能处理方法的参数上。
      *  详情请参考博客：https://www.cnblogs.com/wangchuanfu/p/5913310.html
      *
      * public String queryUserName(@RequestParam String userName);

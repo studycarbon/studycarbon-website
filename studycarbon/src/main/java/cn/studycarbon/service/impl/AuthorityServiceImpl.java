@@ -12,6 +12,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     @Autowired
     private AuthorityRepository authorityRepository;
 
+    // 根据id获取对应的角色权限
     @Override
     public Authority getAuthorityById(Long id) {
         return authorityRepository.findById(id).get();

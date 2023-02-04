@@ -29,15 +29,20 @@ public class BlogServiceImpl implements BlogService {
     public Blog saveBlog(Blog blog) {
         // 判断是否是新创建的博客
         boolean isNew = (blog.getId() == null);
+
         EsBlog esBlog = null;
         Blog returnBlog = blogRepository.save(blog);
-        // 暂时不进行博客搜索相关内容
+
         if (isNew) {
+            // 是新创建的博客，根据blog创建esBlog
             esBlog = new EsBlog(returnBlog);
         } else {
+            // 不是新创建的博客，获取到esBlog对象 并更新esBlog
             esBlog = esBlogService.getEsBlogByBlogId(blog.getId());
             esBlog.update(returnBlog);
         }
+
+        // 更新esBlog对象
         esBlogService.updateEsBlog(esBlog);
         return returnBlog;
     }
@@ -45,13 +50,15 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     @Override
     public void removeBlog(Long id) {
-        blogRepository.deleteById(id);
         // EsBlog esblog = esBlogService.getEsBlogByBlogId(id);
         // esBlogService.removeEsBlog(esblog.getId());
+
+        blogRepository.deleteById(id);
     }
 
     @Override
     public Blog getBlogById(Long id) {
+        // 不应该直接操作repo, 应该通过serviece调用repo
         return blogRepository.findById(id).get();
     }
 
@@ -109,9 +116,19 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Blog createVote(Long blogId) {
+        // 获取到原始的blog
         Blog originalBlog = blogRepository.findById(blogId).get();
+        if (originalBlog == null) {
+            throw new IllegalArgumentException("无法查询到博客,博客id="+blogId);
+        }
+
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (user == null) {
+            throw new IllegalArgumentException("无法点赞, 用户未登录");
+        }
+
         Vote vote = new Vote(user);
+
         boolean isExist = originalBlog.addVote(vote);
         if (isExist) {
             throw new IllegalArgumentException("该用户已经点过赞了");

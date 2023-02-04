@@ -70,10 +70,16 @@ public class MainController {
     // 注册用户
     @PostMapping("/register")
     public String registerUser(User user) {
+        logger.info("register user: <{}>", user);
         List<Authority> authorities = new ArrayList<>();
+
         // 2L 代码用户角色
         authorities.add(authorityService.getAuthorityById(2L));
         user.setAuthorities(authorities);
+
+        // 用户密码加密，用户发送上来的密码不是加密的，需要加密存储
+        user.setEncodePassword(user.getPassword());
+
         // 保存用户信息
         userService.saveOrUpdateUser(user);
         // 跳转到登录页面
