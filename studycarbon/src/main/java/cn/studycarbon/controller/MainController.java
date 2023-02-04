@@ -34,13 +34,14 @@ public class MainController {
     // 主页
     @GetMapping("/")
     public String root() {
+        logger.info("get / =>");
         return "redirect:/index";
     }
 
     // 返回首页
     @GetMapping("/index")
     public String index() {
-        logger.info("get index.");
+        logger.info("get index =>");
         return "forward:/blogs";
     }
 
@@ -48,14 +49,14 @@ public class MainController {
     @GetMapping("/login")
     public String login() {
         // 返回登录页面
-        logger.info("get login page.");
+        logger.info("get /login =>");
         return "login";
     }
 
     // 登录错误
     @GetMapping("/login-error")
     public String loginError(Model model) {
-        logger.info("login error =>");
+        logger.info("login /login-error =>");
         model.addAttribute("loginError", true);
         model.addAttribute("errorMsg", "登录失败，用户名或者密码错误");
         return "login";
@@ -64,16 +65,17 @@ public class MainController {
     // 注册页面
     @GetMapping("/register")
     public String register(User user) {
+        logger.info("get /register");
         return "register";
     }
 
     // 注册用户
     @PostMapping("/register")
     public String registerUser(User user) {
-        logger.info("register user: <{}>", user);
-        List<Authority> authorities = new ArrayList<>();
+        logger.info("post /register user<{}>", user);
 
         // 2L 代码用户角色
+        List<Authority> authorities = new ArrayList<>();
         authorities.add(authorityService.getAuthorityById(2L));
         user.setAuthorities(authorities);
 
@@ -89,6 +91,7 @@ public class MainController {
     // 跳转到搜索页面
     @GetMapping("/search")
     public String search() {
+        logger.info("get /search");
         return "search";
     }
 }
