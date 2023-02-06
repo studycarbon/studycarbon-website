@@ -65,14 +65,14 @@ public class MainController {
     // 注册页面
     @GetMapping("/register")
     public String register(User user) {
-        logger.info("get /register");
+        logger.info("get /register =>");
         return "register";
     }
 
     // 注册用户
     @PostMapping("/register")
     public String registerUser(User user) {
-        logger.info("post /register user<{}>", user);
+        logger.info("post /register => user<{}>", user);
 
         // 2L 代码用户角色
         List<Authority> authorities = new ArrayList<>();
@@ -91,7 +91,7 @@ public class MainController {
     // 跳转到搜索页面
     @GetMapping("/search")
     public String search() {
-        logger.info("get /search");
+        logger.info("get /search =>");
         return "search";
     }
 }
