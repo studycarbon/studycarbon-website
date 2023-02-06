@@ -46,7 +46,6 @@ public class BlogController {
             Model model) {
 
         logger.info("order:{},keyword:{},async:{},pageIndex:{},pageSize:{}", order, keyword, async, pageIndex, pageSize);
-
         Page<EsBlog> page = null;
         List<EsBlog> list = null;
         boolean isEmpty = true; // 系统初始化时，没有博客数据

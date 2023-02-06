@@ -21,9 +21,10 @@
             <thead>
             <tr>
                 <th data-field="id">ID</th>
-                <th data-field="username">账号名</th>
-                <th data-field="content">博客标题</th>
-                <th data-field="createTime">创建时间</th>
+                <th data-field="username">账号</th>
+                <th data-field="content">标题</th>
+                <th data-field="createTime">时间</th>
+                <th data-field="display">展示</th>
                 <th data-field="operation">操作</th>
             </tr>
             </thead>
@@ -35,6 +36,7 @@
                 <td th:text="${blog.username}">1</td>
                 <td th:text="${blog.title}">标题</td>
                 <td th:text="${#dates.format(blog.createTime, 'yyyy-MM-dd HH:mm:ss')}">创建时间</td>
+                <td th:text="${blog.display}">展示</td>
                 <td>
                     <div>
                         <a class="edit-blog" data-toggle="modal" data-target="#flipFlop" role="button" data-th-attr="blogId=${blog.id}">

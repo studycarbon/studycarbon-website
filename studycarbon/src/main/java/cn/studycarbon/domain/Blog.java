@@ -17,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -32,26 +33,26 @@ public class Blog implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
     private Long id; // 用户的唯一标识
 
-    @NotEmpty(message = "标题不能为空")
+    @NotBlank(message = "标题不能为空")
     @Size(min = 2, max = 50)
     @Column(nullable = false, length = 50) // 映射为字段，值不能为空
     private String title;
 
-    @NotEmpty(message = "摘要不能为空")
+    @NotBlank(message = "摘要不能为空")
     @Size(min = 2, max = 300)
     @Column(nullable = false) // 映射为字段，值不能为空
     private String summary;
 
     @Lob  // 大对象，映射 MySQL 的 Long Text 类型
     @Basic(fetch = FetchType.LAZY) // 懒加载
-    @NotEmpty(message = "内容不能为空")
+    @NotBlank(message = "内容不能为空")
     @Size(min = 2)
     @Column(nullable = false) // 映射为字段，值不能为空
     private String content;
 
     @Lob  // 大对象，映射 MySQL 的 Long Text 类型
     @Basic(fetch = FetchType.LAZY) // 懒加载
-    @NotEmpty(message = "内容不能为空")
+    @NotBlank(message = "内容不能为空")
     @Size(min = 2)
     @Column(nullable = false) // 映射为字段，值不能为空
     private String htmlContent; // 将 md 转为 html
@@ -91,6 +92,9 @@ public class Blog implements Serializable {
 
     @Column(name = "tags", length = 100)
     private String tags;  // 标签 "a,b,c"
+
+    // 是否展示
+    private boolean display = false;
 
     // 设置为保护外界不允许访问默认构造函数
     protected Blog() {
@@ -270,6 +274,14 @@ public class Blog implements Serializable {
 
     public void setCatalog(Catalog catalog) {
         this.catalog = catalog;
+    }
+
+    public boolean getDisplay() {
+        return  this.display;
+    }
+
+    public void setDisplay(boolean display) {
+        this.display = display;
     }
 
     @Override

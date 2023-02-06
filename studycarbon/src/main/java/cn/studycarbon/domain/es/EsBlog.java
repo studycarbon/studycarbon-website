@@ -69,6 +69,9 @@ public class EsBlog implements Serializable {
     @Field(type = FieldType.Text)
     private String tags;  // 标签
 
+    // 是否展示
+    private boolean display = false;
+
     // jpa规范要求，设置为protected,这里设置为public
     protected EsBlog() {
     }
@@ -220,6 +223,14 @@ public class EsBlog implements Serializable {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public boolean getDisplay() {
+        return  this.display;
+    }
+
+    public void setDisplay(boolean display) {
+        this.display = display;
     }
 
     @Override
