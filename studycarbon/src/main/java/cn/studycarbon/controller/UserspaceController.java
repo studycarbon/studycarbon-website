@@ -197,11 +197,6 @@ public class UserspaceController {
         // 拦截不能被展示的评论
         List<Comment> comments = blog.getComments();
         logger.info("blog get comments:"+comments);
-//        for (Comment comment : comments) {
-//            if(comment.getDisplay() == false) {
-//                comments.remove(comment);
-//            }
-//        }
 
         for (int i = 0; i < comments.size(); i++) {
             if (comments.get(i).getDisplay() == false) {
