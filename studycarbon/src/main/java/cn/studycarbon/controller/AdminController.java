@@ -18,7 +18,7 @@ public class AdminController {
     // 日志
     private static Logger logger = LoggerFactory.getLogger(AdminController.class);
 
-    // 判断该路径是否被拦截, 会判断该
+    // 判断该路径是否被拦截
     @GetMapping
     public ModelAndView adminView(Model model) {
         logger.info("get admin views =>");
