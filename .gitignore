@@ -1,3 +1,4 @@
 studycarbon/target/*
 .idea/*
 studycarbon/.idea/*
+private_conf/*
