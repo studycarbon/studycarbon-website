@@ -34,7 +34,7 @@
                 <td th:text="${blog.blogId}">1</td>
                 <td th:text="${blog.username}">1</td>
                 <td th:text="${blog.title}">标题</td>
-                <td th:text="${blog.createTime}">创建时间</td>
+                <td th:text="${#dates.format(blog.createTime, 'yyyy-MM-dd HH:mm:ss')}">创建时间</td>
                 <td>
                     <div>
                         <a class="edit-blog" data-toggle="modal" data-target="#flipFlop" role="button" data-th-attr="blogId=${blog.id}">
