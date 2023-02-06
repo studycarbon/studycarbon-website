@@ -34,6 +34,7 @@ public class CommentServiceImpl implements CommentService {
     public void updateComment(Comment comment) {
         Comment orginComment = getCommentById(comment.getId());
         orginComment.setContent(comment.getContent());
+        orginComment.setDisplay(comment.getDisplay());
         commentRepository.save(orginComment);
     }
 

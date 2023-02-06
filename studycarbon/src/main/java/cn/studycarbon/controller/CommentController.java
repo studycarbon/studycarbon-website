@@ -46,14 +46,16 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-
-    /**
-     * 获取评论列表
-     */
+    // 获取评论列表
     @GetMapping
     public String listComments(@RequestParam(value = "blogId", required = true) Long blogId, Model model) {
         Blog blog = blogService.getBlogById(blogId);
         List<Comment> comments = blog.getComments();
+        for (int i = 0; i < comments.size(); i++) {
+            if (comments.get(i).getDisplay() == false) {
+                comments.remove(i--);
+            }
+        }
 
         // 判断操作用户是否是评论的所有者
         String commentOwner = "";

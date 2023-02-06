@@ -17,13 +17,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-/**
- * Comment 实体
- *
- * @author <a href="https://waylau.com">Way Lau</a>
- * @since 1.0.0 2017年4月9日
- */
-@Entity // 实体
+// 评论实体
+@Entity
 public class Comment implements Serializable {
 
     @Id // 主键
@@ -47,6 +42,9 @@ public class Comment implements Serializable {
     @org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
     private Timestamp createTime;
 
+    // 是否展示当前评论 防止恶意评论
+    private boolean display;
+
     @Override
     public String toString() {
         return "Comment{" +
@@ -54,6 +52,7 @@ public class Comment implements Serializable {
                 ", content='" + content + '\'' +
                 ", user=" + user +
                 ", createTime=" + createTime +
+                ", display=" + display +
                 '}';
     }
 
@@ -65,6 +64,7 @@ public class Comment implements Serializable {
         this.content = content;
         this.user = user;
         this.blog = blog;
+        this.display = false;
     }
 
     public Blog getBlog() {
@@ -101,6 +101,16 @@ public class Comment implements Serializable {
 
     public Timestamp getCreateTime() {
         return createTime;
+    }
+
+    // 获取展示页面
+    public boolean getDisplay() {
+        return display;
+    }
+
+    // 设置展示页面
+    public void setDisplay(boolean display) {
+        this.display = display;
     }
 
 }

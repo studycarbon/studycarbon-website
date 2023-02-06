@@ -92,8 +92,8 @@ public class Blog implements Serializable {
     @Column(name = "tags", length = 100)
     private String tags;  // 标签 "a,b,c"
 
+    // 设置为保护外界不允许访问默认构造函数
     protected Blog() {
-        // TODO Auto-generated constructor stub
     }
 
     public Blog(String title, String summary, String content) {

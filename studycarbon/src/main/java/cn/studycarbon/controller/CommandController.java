@@ -29,6 +29,7 @@ public class CommandController {
     @RequestMapping("/updateEsBlog") // 设置映射路径
     @ResponseBody // 返回json结构体
     String updateEsBlog() {
+        logger.info("get /command/updateEsBlog =>");
         // 获取所有博客
         List<Blog> blogs = blogService.getAllBlogs();
         // 将blogs更新至esBlog

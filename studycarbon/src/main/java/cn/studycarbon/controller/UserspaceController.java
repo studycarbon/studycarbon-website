@@ -1,9 +1,6 @@
 package cn.studycarbon.controller;
 
-import cn.studycarbon.domain.Blog;
-import cn.studycarbon.domain.Catalog;
-import cn.studycarbon.domain.User;
-import cn.studycarbon.domain.Vote;
+import cn.studycarbon.domain.*;
 import cn.studycarbon.service.BlogService;
 import cn.studycarbon.service.CatalogService;
 import cn.studycarbon.service.UserService;
@@ -167,6 +164,7 @@ public class UserspaceController {
      */
     @GetMapping("/{username}/blogs/{id}")
     public String getBlogById(@PathVariable("username") String username, @PathVariable("id") Long id, Model model) {
+        // 获取博客内容
         logger.info("get blog username:" + username + " blog id:" + id);
         User principal = null;
         Blog blog = blogService.getBlogById(id);
@@ -182,7 +180,7 @@ public class UserspaceController {
             }
         }
 
-        logger.info("get blog isBlogOwner:" + isBlogOwner);
+        logger.info("is blog owner:" + isBlogOwner);
 
         // 判断操作用户的点赞情况
         List<Vote> votes = blog.getVotes();
@@ -195,6 +193,22 @@ public class UserspaceController {
                 }
             }
         }
+
+        // 拦截不能被展示的评论
+        List<Comment> comments = blog.getComments();
+        logger.info("blog get comments:"+comments);
+//        for (Comment comment : comments) {
+//            if(comment.getDisplay() == false) {
+//                comments.remove(comment);
+//            }
+//        }
+
+        for (int i = 0; i < comments.size(); i++) {
+            if (comments.get(i).getDisplay() == false) {
+                comments.remove(i--);
+            }
+        }
+        blog.setComments(comments);
 
         model.addAttribute("isBlogOwner", isBlogOwner);
         model.addAttribute("blogModel", blog);

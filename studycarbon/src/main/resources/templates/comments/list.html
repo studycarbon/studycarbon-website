@@ -23,7 +23,8 @@
                     <th data-field="id">ID</th>
                     <th data-field="username">账号</th>
                     <th data-field="name">姓名</th>
-                    <th data-field="content">评论内容</th>
+                    <th data-field="content">内容</th>
+                    <th data-field="display">展示</th>
                     <th data-field="operation">操作</th>
                 </tr>
             </thead>
@@ -34,7 +35,8 @@
                     <td th:text="${comment.id}">1</td>
                     <td th:text="${comment.user.username}">1</td>
                     <td th:text="${comment.user.name}">waylau</td>
-                    <td th:text="${comment.content}">这里是评论内容</td>
+                    <td th:text="${comment.content}">内容</td>
+                    <td th:text="${comment.display}">1</td>
                     <td>
                         <div>
                             <a class="edit-comment" data-toggle="modal" data-target="#flipFlop" role="button" data-th-attr="commentId=${comment.id}">

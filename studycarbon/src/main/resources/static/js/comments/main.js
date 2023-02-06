@@ -79,7 +79,6 @@ $(function() {
             data:$('#commentForm').serialize(),
             success: function(data){
                 $('#commentForm')[0].reset();
-
                 if (data.success) {
                     // 从新刷新主界面
                     getCommentList(0, _pageSize);
