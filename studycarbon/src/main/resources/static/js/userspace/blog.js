@@ -82,6 +82,8 @@ $(function() {
                     $('#commentContent').val('');
                     // 获取评论列表
                     getCommnet(blogId);
+                    // 评论提交后需要管理员审核后才进行显示
+                    toastr.warning("评论成功，等待管理员审核后显示...");
                 } else {
                     toastr.error(data.message);
                 }
