@@ -11,7 +11,7 @@
     <div class="row">
 
         <!-- 左侧栏目 -->
-        <div class="col-md-4 col-xl-3" style="background-color: white;height: 750px;">
+        <div class="col-md-4 col-xl-3" style="background-color: white;">
             <!--头像区域-->
             <div class="row" style="margin-top: 20px;">
                 <div class="col-md-12">
@@ -26,8 +26,8 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <i class="card-text" th:text="${user.name}" style="font-style:normal;">老卫</i>
-                    <i class="card-text" th:text="${user.username}" style="font-style:normal;">waylau</i>
+                    <i class="card-text" th:text="${user.username}" style="font-style:normal;">waylau</i><br/>
+                    <i class="card-text" th:text="'本站第'+${user.id}+'位会员'" style="font-style:normal;">waylau</i>
                 </div>
             </div>
 
