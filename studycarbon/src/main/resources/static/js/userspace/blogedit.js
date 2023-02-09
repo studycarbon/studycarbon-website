@@ -18,8 +18,8 @@ $(function() {
         },
         resize: 'vertical',
         localStorage: 'md',
-        imgurl: 'http://studycarbon.cn:8081',
-        base64url: 'http://studycarbon.cn:8081'
+        imgurl: 'http://49.232.169.205:8081',
+        base64url: 'http://49.232.169.205:8081'
     });
 
 
@@ -36,7 +36,7 @@ $(function() {
 
     $("#uploadImage").click(function() {
         $.ajax({
-            url: 'http://studycarbon.cn:8081/upload',
+            url: 'http://49.232.169.205:8081/upload',
             type: 'POST',
             cache: false,
             data: new FormData($('#uploadformid')[0]),

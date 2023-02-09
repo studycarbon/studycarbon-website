@@ -5,10 +5,9 @@
 </head>
     <body>
 
-    <div class="container blog-content-container">
+    <div class="container blog-content-container" style="background-color: white;padding: 15px;">
 <!--		form表单-->
 		<form  th:action="@{/login}" method="post">
-			<h2 >请登录</h2>
 			<div class="form-group col-md-5">
 				<label for="username" class="col-form-label">账号</label>
 				<input type="text" class="form-control" id="username" name="username" maxlength="50" placeholder="请输入账号">
