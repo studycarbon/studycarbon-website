@@ -41,6 +41,8 @@
                             <i class="fa fa-heart-o" aria-hidden="true">[[${blogModel.voteSize}]]</i>
                             <!--多少评论条数-->
                             <i class="fa fa-comment-o" aria-hidden="true">[[${blogModel.commentSize}]]</i>
+                            <a href="/u/waylau" th:if="${isBlogOwner}" th:href="'/u/' + ${blogModel.user.username}+ '/blogs/edit/'+ ${blogModel.id}" class="btn btn-primary float-right">编辑</a>
+                            <a href="javascript:void(0)" th:if="${isBlogOwner}" class="btn btn-primary float-right blog-delete-blog">删除</a>
                         </div>
                         <hr>
 
