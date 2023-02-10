@@ -112,6 +112,7 @@
                             </h2>
                             <p class="card-text" th:text="${blog.summary}" style="font-size: 12px;color: #aaa;"> 文章摘要内容 ...</p>
                             <div class="card-text">
+                                <a href="/u/waylau"  class="card-link" th:href="'/u/' + ${blog.user.username}" th:text="${blog.user.username}">waylau</a>
                                 发表于 [[${#dates.format(blog.createTime, 'yyyy-MM-dd HH:mm')}]]
                                 <i class="fa fa-eye" aria-hidden="true">[[${blog.readSize}]]</i>
                                 <i class="fa fa-heart-o" aria-hidden="true">[[${blog.voteSize}]]</i>
