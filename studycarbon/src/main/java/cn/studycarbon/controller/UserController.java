@@ -70,7 +70,6 @@ public class UserController {
                              @RequestParam(value = "name", required = false, defaultValue = "") String name,
                              Model model) {
         logger.info("get users list: async<{}>, pageIndex<{}>, pageSize<{}>, name<{}>", async, pageIndex, pageSize, name);
-
         Pageable pageable = PageRequest.of(pageIndex, pageSize);
         Page<User> page = userService.listUsersByNameLike(name, pageable);
 
@@ -84,10 +83,9 @@ public class UserController {
     // 获取form表单页面
     @GetMapping("/add")
     public ModelAndView createForm(Model model) {
-        //System.out.println("===================================================list===================================================");
+        logger.info("get users/add =>");
         User user = new User(null, null, null);
         model.addAttribute("user", user);
-        //System.out.println(user);
         return new ModelAndView("users/add", "userModel", model);
     }
 
@@ -132,6 +130,7 @@ public class UserController {
     // 删除用户
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Response> delete(@PathVariable("id") Long id, Model model) {
+        logger.info("delete user id = {} =>", id);
         try {
             userService.removeUser(id);
         } catch (Exception e) {
@@ -143,6 +142,7 @@ public class UserController {
     // 获取修改用户的界面，及数据
     @GetMapping(value = "edit/{id}")
     public ModelAndView modifyForm(@PathVariable("id") Long id, Model model) {
+        logger.info("edit users id = {}", id);
         User user = userService.getUserById(id);
         model.addAttribute("user", user);
         return new ModelAndView("users/edit", "userModel", model);
