@@ -47,3 +47,6 @@ spring:
         cache: false
         compressed: true
 
+
+  # 远程部署参考：https://blog.csdn.net/qq_41473638/article/details/126879439?ops_request_misc=&request_id=&biz_id=102&utm_term=idea%E8%BF%9C%E7%A8%8B%E5%8F%91%E5%B8%83&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-126879439.142^v73^insert_down2,201^v4^add_ask,239^v2^insert_chatgpt&spm=1018.2226.3001.4187
+
