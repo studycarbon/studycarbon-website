@@ -135,6 +135,7 @@ public class BlogController {
     // 最新的5篇文章
     @GetMapping("/newest")
     public String listNewestEsBlogs(Model model) {
+        logger.info("get /newest =>");
         List<EsBlog> newest = esBlogService.listTop5NewestEsBlogs();
         model.addAttribute("newest", newest);
         return "newest";

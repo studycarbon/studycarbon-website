@@ -48,7 +48,6 @@ public class EsBlogServiceImpl implements EsBlogService {
     //private ElasticsearchTemplate elasticsearchTemplate;
     //@Autowired
     //private ElasticsearchRestTemplate elasticsearchRestTemplate;
-
     //@Autowired
     //private UserService userService;
 
@@ -107,16 +106,11 @@ public class EsBlogServiceImpl implements EsBlogService {
     // 获取到最新的5篇文章
     @Override
     public List<EsBlog> listTop5NewestEsBlogs() {
-        Page<EsBlog> page = this.listHotestEsBlogs(EMPTY_KEYWORD, TOP_5_PAGEABLE);
+        Page<EsBlog> page = this.listNewestEsBlogs(EMPTY_KEYWORD, TOP_5_PAGEABLE);
         return page.getContent();
     }
 
-    /**
-     * 最热前5
-     *
-     * @param keyword
-     * @return
-     */
+    // 获取最热的5篇文章
     @Override
     public List<EsBlog> listTop5HotestEsBlogs() {
         Page<EsBlog> page = this.listHotestEsBlogs(EMPTY_KEYWORD, TOP_5_PAGEABLE);

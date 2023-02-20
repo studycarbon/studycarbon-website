@@ -269,6 +269,7 @@ public class UserspaceController {
                 Blog orignalBlog = blogService.getBlogById(blog.getId());
                 orignalBlog.setTitle(blog.getTitle());
                 orignalBlog.setContent(blog.getContent());
+                orignalBlog.setHtmlContent(blog.getHtmlContent());
                 orignalBlog.setSummary(blog.getSummary());
                 orignalBlog.setCatalog(blog.getCatalog());
                 orignalBlog.setTags(blog.getTags());

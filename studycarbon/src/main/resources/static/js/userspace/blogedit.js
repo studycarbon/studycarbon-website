@@ -68,6 +68,7 @@ $(function() {
                 "title": $('#title').val(),
                 "summary": $('#summary').val(),
                 "content": $('#md').val(),
+                "htmlContent": $('#md').data('markdown').parseContent($('#md').val()),
                 "catalog": { "id": $('#catalogSelect').val() },
                 "tags": $('.form-control-tag').val()
             }),
