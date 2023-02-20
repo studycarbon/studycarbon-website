@@ -1,4 +1,4 @@
-# Carbon 中文网
+# Carbon 语言中文网
 
 致力于讨论和发展carbon语言，这是carbon中文网。
 
