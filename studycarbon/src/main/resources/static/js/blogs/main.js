@@ -1,7 +1,7 @@
 // comment main js
 $(function() {
-    var _pageSize;
 
+    var _pageSize;
     function getBlogList(pageIndex, pageSize) {
         $.ajax({
             url: "/blogs/all",
@@ -31,6 +31,5 @@ $(function() {
     $("#searchNameBtn").click(function() {
         getBlogList(0, _pageSize);
     });
-
 
 })

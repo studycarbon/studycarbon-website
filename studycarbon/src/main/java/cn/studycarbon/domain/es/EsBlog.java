@@ -114,6 +114,7 @@ public class EsBlog implements Serializable {
         this.commentSize = blog.getCommentSize();
         this.voteSize = blog.getVoteSize();
         this.tags = blog.getTags();
+        this.display = blog.getDisplay();
     }
 
     public void update(Blog blog) {
@@ -127,6 +128,7 @@ public class EsBlog implements Serializable {
         this.commentSize = blog.getCommentSize();
         this.voteSize = blog.getVoteSize();
         this.tags = blog.getTags();
+        this.display = blog.getDisplay();
     }
 
     public String getId() {

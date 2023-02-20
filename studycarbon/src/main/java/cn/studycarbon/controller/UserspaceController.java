@@ -167,43 +167,52 @@ public class UserspaceController {
         // 获取博客内容
         logger.info("get blog username:" + username + " blog id:" + id);
         User principal = null;
-        Blog blog = blogService.getBlogById(id);
-        // 每次读取，简单的可以认为阅读量增加1次
-        blogService.readingIncrease(id);
-        // 判断操作用户是否是博客的所有者
         boolean isBlogOwner = false;
-        if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
-                && !SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser")) {
-            principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            if (principal != null && username.equals(principal.getUsername())) {
-                isBlogOwner = true;
-            }
-        }
-
-        logger.info("is blog owner:" + isBlogOwner);
-
-        // 判断操作用户的点赞情况
-        List<Vote> votes = blog.getVotes();
+        Blog blog = blogService.getBlogById(id);
+        List<Vote> votes = null;
+        List<Comment> comments = null;
         Vote currentVote = null; // 当前用户的点赞情况
-        if (principal != null) {
-            for (Vote vote : votes) {
-                if (vote.getUser().getUsername().equals(principal.getUsername())) {
-                    currentVote = vote;
-                    break;
+
+        // 博客不为空的话
+        if (blog != null) {
+            // 每次读取，简单的可以认为阅读量增加1次
+            blogService.readingIncrease(id);
+            // 判断操作用户是否是博客的所有者
+            if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
+                    && !SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser")) {
+                principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                if (principal != null && username.equals(principal.getUsername())) {
+                    isBlogOwner = true;
                 }
             }
-        }
 
-        // 拦截不能被展示的评论
-        List<Comment> comments = blog.getComments();
-        logger.info("blog get comments:"+comments);
-
-        for (int i = 0; i < comments.size(); i++) {
-            if (comments.get(i).getDisplay() == false) {
-                comments.remove(i--);
+            // 判断操作用户的点赞情况
+            votes = blog.getVotes();
+            if (principal != null) {
+                for (Vote vote : votes) {
+                    if (vote.getUser().getUsername().equals(principal.getUsername())) {
+                        currentVote = vote;
+                        break;
+                    }
+                }
             }
+
+            // 拦截不能被展示的评论
+            comments = blog.getComments();
+            logger.info("blog get comments:"+comments);
+
+            for (int i = 0; i < comments.size(); i++) {
+                if (comments.get(i).getDisplay() == false) {
+                    comments.remove(i--);
+                }
+            }
+            blog.setComments(comments);
         }
-        blog.setComments(comments);
+
+        // 获取博客页面时候，如果是不允许显示的博客，需要审核才能显示
+        if (blog.getDisplay() == false) {
+            blog.setHtmlContent("<p>此博客暂未经过管理员审核，暂不能显示，请等待审核...</p>\n");
+        }
 
         model.addAttribute("isBlogOwner", isBlogOwner);
         model.addAttribute("blogModel", blog);
@@ -217,6 +226,7 @@ public class UserspaceController {
     @DeleteMapping("/{username}/blogs/{id}")
     @PreAuthorize("authentication.name.equals(#username)")
     public ResponseEntity<Response> deleteBlog(@PathVariable("username") String username, @PathVariable("id") Long id) {
+        logger.info("delete /{}/blogs/{} =>", username, id);
         try {
             blogService.removeBlog(id);
         } catch (Exception e) {
@@ -263,6 +273,7 @@ public class UserspaceController {
         }
 
         try {
+
             // 判断是修改还是新增
             if (blog.getId() != null) {
                 logger.info("blog id is not null, update blog.");
@@ -273,11 +284,13 @@ public class UserspaceController {
                 orignalBlog.setSummary(blog.getSummary());
                 orignalBlog.setCatalog(blog.getCatalog());
                 orignalBlog.setTags(blog.getTags());
+                orignalBlog.setDisplay(false);
                 blogService.saveBlog(orignalBlog);
             } else {
                 logger.info("blog id is null, create blog.");
                 User user = (User) userDetailsService.loadUserByUsername(username);
                 blog.setUser(user);
+                blog.setDisplay(false);
                 blogService.saveBlog(blog);
             }
 
@@ -291,4 +304,22 @@ public class UserspaceController {
         return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
     }
 
+    @GetMapping("/{username}/blogs/display/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String display(@PathVariable("username") String username, @PathVariable("id") Long id) {
+        logger.info("get /{}/blogs/display/{} =>" , username, id);
+        Blog blog = blogService.getBlogById(id);
+        blog.setDisplay(true);
+        blogService.saveBlog(blog);
+        return "redirect:/admins";
+    }
+
+    @GetMapping("/{username}/blogs/notDisplay/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String notDisplay(@PathVariable("username") String username, @PathVariable("id") Long id) {
+        Blog blog = blogService.getBlogById(id);
+        blog.setDisplay(false);
+        blogService.saveBlog(blog);
+        return "redirect:/admins";
+    }
 }

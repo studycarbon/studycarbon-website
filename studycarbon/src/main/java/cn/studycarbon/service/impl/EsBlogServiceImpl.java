@@ -32,11 +32,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.stereotype.Service;
 
 
-//EsBlog 服务.
-//@since 1.0.0 2017年4月12日
-//@author <a href="https://waylau.com">Way Lau</a>
-
-//
+// EsBLogServiceImpl 提供博客搜索的服务等。
 @Service
 public class EsBlogServiceImpl implements EsBlogService {
     @Autowired
@@ -54,9 +50,6 @@ public class EsBlogServiceImpl implements EsBlogService {
     private static final Pageable TOP_5_PAGEABLE = PageRequest.of(0, 5);
     private static final String EMPTY_KEYWORD = "";
 
-    /* (non-Javadoc)
-     * @see com.waylau.spring.boot.blog.service.EsBlogService#removeEsBlog(java.lang.String)
-     */
     @Override
     public void removeEsBlog(String id) {
         esBlogRepository.deleteById(id);
@@ -77,12 +70,10 @@ public class EsBlogServiceImpl implements EsBlogService {
     @Override
     public Page<EsBlog> listNewestEsBlogs(String keyword, Pageable pageable) throws SearchParseException {
         Page<EsBlog> pages = null;
-        // 构建排序器
         Sort sort = Sort.by(Direction.DESC, "createTime");
         if (pageable.getSort() == null) {
             pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
         }
-
         pages = esBlogRepository.findDistinctEsBlogByTitleContainingOrSummaryContainingOrContentContainingOrTagsContaining(keyword, keyword, keyword, keyword, pageable);
 
         return pages;
