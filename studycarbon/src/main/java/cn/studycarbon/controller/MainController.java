@@ -100,4 +100,16 @@ public class MainController {
         logger.info("get /about =>");
         return "about";
     }
+
+    @GetMapping("/contribute")
+    public String contribute() {
+        logger.info("get /contribute =>");
+        return "contribute";
+    }
+
+    @GetMapping("/disclaimers")
+    public  String disclaimers() {
+        logger.info("get /disclaimers");
+        return "disclaimers";
+    }
 }
