@@ -94,4 +94,10 @@ public class MainController {
         logger.info("get /search =>");
         return "search";
     }
+
+    @GetMapping("/about")
+    public String about() {
+        logger.info("get /about =>");
+        return "about";
+    }
 }
