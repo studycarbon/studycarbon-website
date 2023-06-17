@@ -104,6 +104,12 @@
 			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.github.tobato</groupId>
+			<artifactId>fastdfs-client</artifactId>
+			<version>1.26.7</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

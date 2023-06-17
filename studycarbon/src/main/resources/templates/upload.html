@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="~{fragments/header :: header}">
+</head>
+<body>
+
+<div class="container">
+  <div style="margin-top: 20px;background-color: white;padding: 20px;">
+    <h5>文件上传</h5> <br/>
+    <form action="/files/uploadFile" method="post" enctype="multipart/form-data">
+      <p>
+        选择文件: <input type="file" name="file"/>
+      </p>
+      <p>
+        <input type="submit" value="提交"/>
+      </p>
+    </form>
+  </div>
+</div>
+</body>
+
+<div th:replace="~{fragments/footer :: footer}">...</div>
+
+</html>
